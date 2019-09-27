@@ -108,9 +108,9 @@
 <meta property="og:description" content="前言對於 Gtilab、git 指令或者寫 script 其實都並不是很熟，這次花了一些時間進行部署，希望能寫下來當作學習筆記，也方便未來複習。 想解決的問題是：在 Gitlab 上進行開發，當開發到一個新的版本後，就需要使用 sphinx 將編寫的程式碼及使用文件轉換成 HTML 格式，並將轉換完成的網頁更新到 nginx server上，最後重啟 nginx 的 docker。然而每次都需要人">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="http://yoursite.com/images/gitlab_ci/gitlab_token.png">
-<meta property="og:image" content="http://yoursite.com/images/gitlab_ci/custom_variable.png">
-<meta property="og:image" content="http://yoursite.com/images/gitlab_ci/private_key.png">
-<meta property="og:updated_time" content="2019-09-27T06:53:49.120Z">
+<meta property="og:image" content="http://yoursite.com/images/gitlab_ci/custom_variable.PNG">
+<meta property="og:image" content="http://yoursite.com/images/gitlab_ci/private_key.PNG">
+<meta property="og:updated_time" content="2019-09-27T07:09:05.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gitlab CI 更新遠端伺服器網頁">
 <meta name="twitter:description" content="前言對於 Gtilab、git 指令或者寫 script 其實都並不是很熟，這次花了一些時間進行部署，希望能寫下來當作學習筆記，也方便未來複習。 想解決的問題是：在 Gitlab 上進行開發，當開發到一個新的版本後，就需要使用 sphinx 將編寫的程式碼及使用文件轉換成 HTML 格式，並將轉換完成的網頁更新到 nginx server上，最後重啟 nginx 的 docker。然而每次都需要人">
@@ -352,7 +352,7 @@
                 
                   <span class="post-meta-item-text">更新於</span>
                 
-                <time title="修改時間：2019-09-27 14:53:49" itemprop="dateModified" datetime="2019-09-27T14:53:49+08:00">2019-09-27</time>
+                <time title="修改時間：2019-09-27 15:09:05" itemprop="dateModified" datetime="2019-09-27T15:09:05+08:00">2019-09-27</time>
               </span>
             
           
@@ -459,12 +459,12 @@
 <p>那麼大概需要注意的幾件事情是：</p>
 <ul>
 <li><p>撰寫內容時有可能會需要使用到自定義的環境變量 ( GitLab Docs 左側欄位 CI/CD-&gt;Environment variables 可查找相關訊息 )，像是上面的 <code>$SSH_PRIVATE_KEY</code>，因為這份 yaml 是放在專案上的，如果是公開給所有人知道，那麼有一些比較私密的內容不想被別人知道則可以用設置環境變量的方式進行。</p>
-<img src="/images/gitlab_ci/custom_variable.png" width="100%">
+<img src="/images/gitlab_ci/custom_variable.PNG" width="100%">
 
 <p>Gitlab UI 裡面 (Setting-&gt;CI/CD) 呈現如上述。可在裡面填入變量及對應內容，如 IP 等等。</p>
 </li>
 <li><p>因為需要 ssh 連線，要記得設置公鑰和私鑰。我們要從 Gitlab CI 這裡建立的 container 連線到 nginx server，所以公鑰要記得給到那台 server，而私鑰則保存到我們剛剛提到的自定義環境變量裡面，如下圖。</p>
-<img src="/images/gitlab_ci/private_key.png" width="100%">
+<img src="/images/gitlab_ci/private_key.PNG" width="100%">
 
 <p>那這邊網路上教學文也很多，就不提了。大概就是記得公鑰要放入 authorized_keys ，私鑰則直接複製貼上上述欄位裡即可。</p>
 <ul>
