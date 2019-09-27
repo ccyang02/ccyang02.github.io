@@ -99,14 +99,22 @@
   };
 </script>
 
-  <meta name="keywords" content="Learning Note、Machine Learning、Python">
-<meta property="og:type" content="website">
-<meta property="og:title" content="涼涼">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="前言對於 Gtilab、git 指令或者寫 script 其實都並不是很熟，這次花了一些時間進行部署，希望能寫下來當作學習筆記，也方便未來複習。 想解決的問題是：在 Gitlab 上進行開發，當開發到一個新的版本後，就需要使用 sphinx 將編寫的程式碼及使用文件轉換成 HTML 格式，並將轉換完成的網頁更新到 nginx server上，最後重啟 nginx 的 docker。然而每次都需要人">
+<meta name="keywords" content="Gitlab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gitlab CI 更新遠端伺服器網頁">
+<meta property="og:url" content="http://yoursite.com/2019/09/08/Gitlab CI 調用遠端 script 更新伺服器網頁/index.html">
 <meta property="og:site_name" content="涼涼">
+<meta property="og:description" content="前言對於 Gtilab、git 指令或者寫 script 其實都並不是很熟，這次花了一些時間進行部署，希望能寫下來當作學習筆記，也方便未來複習。 想解決的問題是：在 Gitlab 上進行開發，當開發到一個新的版本後，就需要使用 sphinx 將編寫的程式碼及使用文件轉換成 HTML 格式，並將轉換完成的網頁更新到 nginx server上，最後重啟 nginx 的 docker。然而每次都需要人">
 <meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="http://yoursite.com/images/gitlab_ci/gitlab_token.png">
+<meta property="og:image" content="http://yoursite.com/images/gitlab_ci/custom_variable.png">
+<meta property="og:image" content="http://yoursite.com/images/gitlab_ci/private_key.png">
+<meta property="og:updated_time" content="2019-09-27T06:53:49.120Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="涼涼">
+<meta name="twitter:title" content="Gitlab CI 更新遠端伺服器網頁">
+<meta name="twitter:description" content="前言對於 Gtilab、git 指令或者寫 script 其實都並不是很熟，這次花了一些時間進行部署，希望能寫下來當作學習筆記，也方便未來複習。 想解決的問題是：在 Gitlab 上進行開發，當開發到一個新的版本後，就需要使用 sphinx 將編寫的程式碼及使用文件轉換成 HTML 格式，並將轉換完成的網頁更新到 nginx server上，最後重啟 nginx 的 docker。然而每次都需要人">
+<meta name="twitter:image" content="http://yoursite.com/images/gitlab_ci/gitlab_token.png">
 
 
 
@@ -114,7 +122,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/08/Gitlab CI 調用遠端 script 更新伺服器網頁/">
 
 
 
@@ -125,7 +133,7 @@
 </script>
 
   
-  <title>涼涼</title>
+  <title>Gitlab CI 更新遠端伺服器網頁 | 涼涼</title>
   
 
 
@@ -173,8 +181,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -216,7 +223,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -272,207 +279,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
-    
-        
 
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/11/Python之classmethod和staticmethod的區別/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jewel Yang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="涼涼">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/09/11/Python之classmethod和staticmethod的區別/" class="post-title-link" itemprop="url">Python之classmethod和staticmethod的觀念理解</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-
-              
-                
-              
-
-              <time title="創建時間：2019-09-11 15:17:53" itemprop="dateCreated datePublished" datetime="2019-09-11T15:17:53+08:00">2019-09-11</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新於</span>
-                
-                <time title="修改時間：2019-09-27 14:55:12" itemprop="dateModified" datetime="2019-09-27T14:55:12+08:00">2019-09-27</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習紀錄/" itemprop="url" rel="index"><span itemprop="name">學習紀錄</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+  <div id="posts" class="posts-expand">
       
-      
-
-      
-        
-          
-            <p>最近在模組開發完後需要轉換成 API 的接口服務，當時遇到一些流程問題需要解決，這篇算是探討 Python 的用法吧。</p>
-<p>大概情境如下，模型訓練完成後，正常情況使用者會接續進行預測的動作，但也有可能因為使用者在自己的排程上暫時不需要再行預測，因此會擱置一段時間。在一段時間的靜置後，server 端會把目前 keep 住的模型消滅掉，以避免資源占用，然而當使用者要重啟服務時，重新訓練模型又會是成本，故希望重新將模型 load 回來，再直接進行預測。所以可使用 classmethod 協助我們在實例化之前把必要的資訊重載，並再行實例化。</p>
-<p>上面大概是問題的情境，不甚清楚可以跳過，僅僅算是個紀錄，可直接看下方的內容。</p>
-<h3 id="使用時機"><a href="#使用時機" class="headerlink" title="使用時機"></a>使用時機</h3><p>通常要使用 class 下方的 method 時(指的是我們經常使用的 instance method )，應是要先把這個 class 先給實例化(補一下實例化和把物件初始化，不確定兩者說法是否指同一件事)，完成後便可應用承接了這個實例下的方法，如下面的程式：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TemperatureSimulator</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, sample_rate)</span>:</span></span><br><span class="line">        self.fs = sample_rate</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train_model</span><span class="params">(self, sensor_data)</span>:</span> </span><br><span class="line">        print(<span class="string">'Detect your sample rate is %d'</span>%self.fs)</span><br><span class="line">        print(<span class="string">'I am training model now...'</span>)</span><br><span class="line">        <span class="keyword">return</span> model</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    simulator = TemperatureSimulator(sample_rate=<span class="number">2</span>)</span><br><span class="line">    simulator.train_model(data)</span><br></pre></td></tr></table></figure>
-
-<p>目前開發中最常使用到的就是上述的用法。那麼 classmethod 和 staticmethod 的用法差異在哪？可來看個簡單的範例，重新建立一下概念。</p>
-<h4 id="流程建立"><a href="#流程建立" class="headerlink" title="流程建立"></a>流程建立</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassA</span>:</span></span><br><span class="line">    attrB = <span class="number">5</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">instance_method</span><span class="params">(self, n)</span>:</span> <span class="comment"># 我們最常使用的method方式，默認第一個參數self是instance本身</span></span><br><span class="line">        print(n)</span><br><span class="line">    </span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">class_method</span><span class="params">(cls, n)</span>:</span> <span class="comment"># 默認第一個參數是class</span></span><br><span class="line">        print(n)</span><br><span class="line">    </span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">static_method</span><span class="params">(n)</span>:</span> <span class="comment"># 指傳入自定義的參數即可</span></span><br><span class="line">        print(n)</span><br><span class="line"></span><br><span class="line">a = ClassA()</span><br><span class="line">a.instance_method(<span class="number">1</span>) <span class="comment"># self: &lt;__main__.A object at 0x00000122EA903908&gt;</span></span><br><span class="line">ClassA.class_method(<span class="number">1</span>) <span class="comment"># cls: &lt;class '__main__.ClassA'&gt;</span></span><br><span class="line">ClassA.static_method(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<p>首先，程式碼會在第一段先執行 ClassA 下面的程式碼，創建一個 ClassA 的 class object，同時初始化裡面的attribute 和 method。</p>
-<p>再來到了<code>a = ClassA()</code>時，才是進行實例化，這時會創建 instance object，而這個 a 會指向這個 instance object。調用<code>a.instance_method(1)</code>時，因為這是一個 instance method，所以 self 參數會與剛剛的 instance object 綁定(總之這時候 a 和 self 都指向同一個地方)。</p>
-<p>最後在<code>ClassA.class_method(1)</code>被使用時，cls 則是指向了剛剛提到的 class object。而 <code>ClassA.static_method(1)</code>則是永遠指向同一個記憶體位置，也就是無論創建了多少實例，它的記憶體位置是永不變的。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 1. 實體方法已實體化後綁定</span></span><br><span class="line">ClassA.instance_method(<span class="number">1</span>) </span><br><span class="line"><span class="comment"># &lt;function ClassA.instance_method at 0x00000122EA8D4620&gt;</span></span><br><span class="line">a = ClassA()</span><br><span class="line">a.instance_method(<span class="number">1</span>) </span><br><span class="line"><span class="comment"># &lt;bound method ClassA.instance_method of &lt;__main__.ClassA object at 0x00000122EA903908&gt;&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### 2. 靜態方法的位置不隨實體物件改變</span></span><br><span class="line">a1 = ClassA()</span><br><span class="line">a2 = ClassA()</span><br><span class="line"></span><br><span class="line">a1.static_method <span class="comment"># &lt;function ClassA.static_method at 0x00000122EA8D4E18&gt;</span></span><br><span class="line">a2.static_method <span class="comment"># &lt;function ClassA.static_method at 0x00000122EA8D4E18&gt;</span></span><br><span class="line"></span><br><span class="line">a1.instance_method <span class="comment"># &lt;bound method ClassA.instance_method of &lt;__main__.ClassA object at 0x00000122EA903978&gt;&gt;</span></span><br><span class="line">a2.instance_method <span class="comment"># &lt;bound method ClassA.instance_method of &lt;__main__.ClassA object at 0x00000122EA903A90&gt;&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 3. 類方法就是綁定類物件</span></span><br><span class="line">ClassA.class_method <span class="comment"># &lt;bound method ClassA.class_method of &lt;class '__main__.ClassA'&gt;&gt;</span></span><br><span class="line">a1.class_method <span class="comment"># &lt;bound method ClassA.class_method of &lt;class '__main__.ClassA'&gt;&gt;</span></span><br><span class="line">a2.class_method <span class="comment"># &lt;bound method ClassA.class_method of &lt;class '__main__.ClassA'&gt;&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>簡單來說，static method 的使用時機可以是在當這個方法裡不需要有 self 或是 cls 時，使用靜態方法能夠比較有效的完成工作，既不需要接收用不到的參數，另外效率也會好一些，因為 instance method，會在實際要使用它時才生成，然而 static method 不會有這個問題。</p>
-<p>然而個人目前使用上的經驗來看，雖然感受上有點雞肋，因為常常開發時總歸大多還是使用 instance method，若遇到這種靜態的狀況，又可以以直接建立 function 的方式去進行，也就是該 function 和 class 包在同一個 module 下，可是實際上若考量到程式編寫時的架構性，當某一個方法雖然不需傳入 self 或 cls，仍然將<strong>該方法歸屬於它要服務的那個類之下</strong>，是非常有助於程式的可讀性的。</p>
-<h3 id="使用實例"><a href="#使用實例" class="headerlink" title="使用實例"></a>使用實例</h3><p>但是在開發階段會遇到一些狀況，例如說我其實根本不需要承接實例化，可是這個方法的整體概念是要在這個 class 下進行的，那麼這個時候就可以使用 staticmethod。只要在 method 前面加上裝飾器 @staticmethod 即可，如下面的程式：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TemperatureSimulator</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, sample_rate)</span>:</span></span><br><span class="line">        self.fs = sample_rate</span><br><span class="line">        </span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_preprocessed_data</span><span class="params">(data)</span>:</span></span><br><span class="line">        print(<span class="string">'Data preprocessing...'</span>)</span><br><span class="line">        <span class="keyword">return</span> preprocessed_data</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    simulator = TemperatureSimulator(sample_rate=<span class="number">2</span>)</span><br><span class="line">    new_date = simulator.get_preprocessed_data(data)</span><br></pre></td></tr></table></figure>
-
-<p>那麼在剛剛提到這次 API 遇到的問題則是 model 重啟的問題，便是藉由 classmethod 內部先行準備好要實例化時 initial 的數據，再將整個物件實例化並傳出，如下面的程式：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TemperatureSimulator</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, sample_rate)</span>:</span></span><br><span class="line">        self.fs = sample_rate</span><br><span class="line">        </span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">load_model</span><span class="params">(cls, load_path)</span>:</span></span><br><span class="line">        print(<span class="string">'Loading info from load_path...'</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> cls(fs_from_loaded_info)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    simulator = TemperatureSimulator.load_model(<span class="string">'our_path'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>如同上述的內容，其實就可以清晰的區分使用時機。</p>
-<p>reference:</p>
-<ul>
-<li><p><a href="https://julien.danjou.info/guide-python-static-class-abstract-methods/" target="_blank" rel="noopener">https://julien.danjou.info/guide-python-static-class-abstract-methods/</a></p>
-</li>
-<li><p><a href="https://kknews.cc/zh-tw/news/j6ljo5l.html" target="_blank" rel="noopener">https://kknews.cc/zh-tw/news/j6ljo5l.html</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/28010894" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/28010894</a></p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        
 
   
   
@@ -502,10 +311,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/09/08/Gitlab CI 調用遠端 script 更新伺服器網頁/" class="post-title-link" itemprop="url">Gitlab CI 更新遠端伺服器網頁</a>
+          <h1 class="post-title" itemprop="name headline">Gitlab CI 更新遠端伺服器網頁
+
               
             
           </h1>
@@ -594,9 +401,7 @@
       
 
       
-        
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>對於 Gtilab、git 指令或者寫 script 其實都並不是很熟，這次花了一些時間進行部署，希望能寫下來當作學習筆記，也方便未來複習。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>對於 Gtilab、git 指令或者寫 script 其實都並不是很熟，這次花了一些時間進行部署，希望能寫下來當作學習筆記，也方便未來複習。</p>
 <p>想解決的問題是：在 Gitlab 上進行開發，當開發到一個新的版本後，就需要使用 sphinx 將編寫的程式碼及使用文件轉換成 HTML 格式，並將轉換完成的網頁更新到 nginx server上，最後重啟 nginx 的 docker。然而每次都需要人工進行這項操作，覺得實在太不自動化，因此想借助 CI 完成這個流程。</p>
 <p>這裡用docker架設的 Gitlab server 和 nginx server 是在不同的兩台機器運作的喔！</p>
 <h2 id="關於-Gitlab-CI-的概念"><a href="#關於-Gitlab-CI-的概念" class="headerlink" title="關於 Gitlab CI 的概念"></a>關於 Gitlab CI 的概念</h2><p>開始使用前，少不了需要研究整個運作架構。</p>
@@ -685,13 +490,13 @@
 <li><a href="https://docs.gitlab.com/" target="_blank" rel="noopener">https://docs.gitlab.com/</a></li>
 </ul>
 
-          
-        
       
     </div>
 
     
 
+    
+      
     
 
     
@@ -709,164 +514,43 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
         
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jewel Yang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="涼涼">
-    </span>
-
-    
-      <header class="post-header">
-
+          
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/27/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
+        <div class="post-tags">
           
+            <a href="/tags/Gitlab/" rel="tag"># Gitlab</a>
           
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-
-              
-                
-              
-
-              <time title="創建時間：2019-07-27 11:16:33" itemprop="dateCreated datePublished" datetime="2019-07-27T11:16:33+08:00">2019-07-27</time>
-            </span>
-          
-
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/27/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/11/Python之classmethod和staticmethod的區別/" rel="prev" title="Python之classmethod和staticmethod的觀念理解">
+                Python之classmethod和staticmethod的觀念理解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
       
     </footer>
   </div>
@@ -875,14 +559,14 @@
   
   </article>
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
+  
+
+
 
         </div>
         
@@ -902,8 +586,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概要
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -977,6 +670,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#關於-Gitlab-CI-的概念"><span class="nav-number">2.</span> <span class="nav-text">關於 Gitlab CI 的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Gitlab-CI-amp-Gitlab-Runner"><span class="nav-number">2.1.</span> <span class="nav-text">Gitlab CI &amp; Gitlab Runner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pipeline"><span class="nav-number">2.2.</span> <span class="nav-text">Pipeline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stages"><span class="nav-number">2.3.</span> <span class="nav-text">Stages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jobs"><span class="nav-number">2.4.</span> <span class="nav-text">Jobs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gitlab-CI-建置流程"><span class="nav-number">3.</span> <span class="nav-text">Gitlab CI 建置流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建置-Gitlab-Runner"><span class="nav-number">3.1.</span> <span class="nav-text">建置 Gitlab Runner</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-1-安裝-Gitlab-Runner"><span class="nav-number">3.1.1.</span> <span class="nav-text">Step 1. 安裝 Gitlab Runner</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-2-註冊-Gitlab-Runner"><span class="nav-number">3.1.2.</span> <span class="nav-text">Step 2. 註冊 Gitlab Runner</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#撰寫-gitlab-ci-yml"><span class="nav-number">3.2.</span> <span class="nav-text">撰寫 .gitlab-ci.yml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小結"><span class="nav-number">4.</span> <span class="nav-text">小結</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -1107,6 +817,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
 
   <script src="/js/next-boot.js?v=7.2.0"></script>
 
