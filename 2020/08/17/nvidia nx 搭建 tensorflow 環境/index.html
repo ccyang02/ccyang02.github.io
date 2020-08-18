@@ -99,18 +99,21 @@
   };
 </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta name="keywords" content="Learning Note、Machine Learning、Python">
+  <meta name="description" content="這篇承接上一個 opencv 安裝的內容，這次要繼續把 tensorflow 的環境弄好。">
+<meta name="keywords" content="Jetson NX">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/07/27/hello-world/index.html">
+<meta property="og:title" content="Nvidia Jetson NX 系列 02.搭建 tensorflow-gpu 環境">
+<meta property="og:url" content="http://yoursite.com/2020/08/17/nvidia nx 搭建 tensorflow 環境/index.html">
 <meta property="og:site_name" content="小菜雞在市場走跳">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="這篇承接上一個 opencv 安裝的內容，這次要繼續把 tensorflow 的環境弄好。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-07-27T03:16:33.212Z">
+<meta property="og:image" content="http://yoursite.com/images/nvidia_nx/tensorflow_cuda.jpg">
+<meta property="og:image" content="http://yoursite.com/images/nvidia_nx/tensorflow_container_version.jpg">
+<meta property="og:updated_time" content="2020-08-18T07:56:39.646Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="Nvidia Jetson NX 系列 02.搭建 tensorflow-gpu 環境">
+<meta name="twitter:description" content="這篇承接上一個 opencv 安裝的內容，這次要繼續把 tensorflow 的環境弄好。">
+<meta name="twitter:image" content="http://yoursite.com/images/nvidia_nx/tensorflow_cuda.jpg">
 
 
 
@@ -118,7 +121,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/07/27/hello-world/">
+  <link rel="canonical" href="http://yoursite.com/2020/08/17/nvidia nx 搭建 tensorflow 環境/">
 
 
 
@@ -129,7 +132,7 @@
 </script>
 
   
-  <title>Hello World | 小菜雞在市場走跳</title>
+  <title>Nvidia Jetson NX 系列 02.搭建 tensorflow-gpu 環境 | 小菜雞在市場走跳</title>
   
 
 
@@ -322,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/nvidia nx 搭建 tensorflow 環境/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="C.C. Yang">
@@ -339,7 +342,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World
+          <h1 class="post-title" itemprop="name headline">Nvidia Jetson NX 系列 02.搭建 tensorflow-gpu 環境
 
               
             
@@ -365,12 +368,41 @@
                 
               
 
-              <time title="Created: 2019-07-27 11:16:33" itemprop="dateCreated datePublished" datetime="2019-07-27T11:16:33+08:00">2019-07-27</time>
+              <time title="Created: 2020-08-17 15:19:29" itemprop="dateCreated datePublished" datetime="2020-08-17T15:19:29+08:00">2020-08-17</time>
             </span>
           
 
           
+            
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-08-18 15:56:39" itemprop="dateModified" datetime="2020-08-18T15:56:39+08:00">2020-08-18</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習紀錄/" itemprop="url" rel="index"><span itemprop="name">學習紀錄</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -400,19 +432,70 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <p>這篇承接上一個 opencv 安裝的內容，這次要繼續把 tensorflow 的環境弄好。</p>
+<a id="more"></a>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>CUDA 安裝完成後，一樣要記得配置環境變量，之後在驅動 gpu 的時候會依照這個環境變量去抓取 <code>libcudart.so.10</code> 檔案。否則會報一個下面這樣的錯誤：</p>
+<blockquote>
+<p>Could not load dynamic library ‘libcudart.so.10.0’</p>
+</blockquote>
+<p>環境變量設置如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ vim ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加入以下三行</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/<span class="built_in">local</span>/cuda/lib64</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/cuda/bin</span><br><span class="line"><span class="built_in">export</span> CUDA_HOME=<span class="variable">$CUDA_HOME</span>:/usr/<span class="built_in">local</span>/cuda</span><br><span class="line"><span class="comment"># 設置完成後存檔</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 環境變量設置完成後就可以用指令查看 CUDA 版本囉</span></span><br><span class="line">$ nvcc --version</span><br><span class="line">nvcc: NVIDIA (R) Cuda compiler driver</span><br><span class="line">Copyright (c) 2005-2019 NVIDIA Corporation</span><br><span class="line">Built on Wed_Oct_23_21:14:42_PDT_2019</span><br><span class="line">Cuda compilation tools, release 10.2, V10.2.89</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<br>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>不過在這上面的安裝最麻煩的應該是曾聽到同事說每個內容物件都要注意版本號，稍一不相容就會報錯。要注意以下幾種東西的版本號：</p>
+<ul>
+<li><p>tensorflow + 是否需要 GPU (1.15.2 之後的版本好像沒這個問題，等等會稍微提到)</p>
+</li>
+<li><p>CUDA 版本 <code>nvcc --version</code></p>
+</li>
+<li><p>cuDNN 版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cat /usr/include/cudnn_version.h | grep CUDNN_MAJOR -A 2</span><br><span class="line"><span class="comment">#define CUDNN_MAJOR 8</span></span><br><span class="line"><span class="comment">#define CUDNN_MINOR 0</span></span><br><span class="line"><span class="comment">#define CUDNN_PATCHLEVEL 0</span></span><br><span class="line">--</span><br><span class="line"><span class="comment">#define CUDNN_VERSION (CUDNN_MAJOR * 1000 + CUDNN_MINOR * 100 + CUDNN_PATCHLEVEL)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#endif /* CUDNN_VERSION_H */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#版本 8.0.0 (CUDNN_MAJOR + MINOR + PATCH)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>jetpack 版本 <code>sudo apt-cache show nvidia-jetpack</code></p>
+</li>
+<li><p>Python 版本</p>
+</li>
+</ul>
+<br>
 
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<img src="/images/nvidia_nx/tensorflow_cuda.jpg">
+
+<center>圖片來源：<a href="https://tensorflow.google.cn/install/source" target="_blank" rel="noopener">tensorflow 官網安裝指南</a></center>
+<br>
+
+<p>安裝依賴包，若要在 virtualenv 安裝的話，記得還是切換到虛擬環境進行安裝。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install libhdf5-serial-dev hdf5-tools libhdf5-dev zlib1g-dev zip libjpeg8-dev</span><br><span class="line"><span class="comment"># Install and upgrade pip3.</span></span><br><span class="line">$ sudo apt-get install python3-pip</span><br><span class="line">$ sudo pip install -U pip testresources setuptools</span><br><span class="line">$ sudo pip install -U numpy==1.16.1 future==0.17.1 mock==3.0.5 h5py==2.9.0 keras_preprocessing==1.0.5 keras_applications==1.0.8 gast==0.2.2 enum34 futures protobuf</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>最後安裝 tensorflow。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v44 tensorflow==1.15.2+nv20.06</span><br></pre></td></tr></table></figure>
+
+<p>這裡 v44 代表我的 jetpack 是 4.4 版本，安裝 tensorflow 1.15.2，nv 是 nvidia tensorflow container 版本，詳情可以看下圖。</p>
+<img src="/images/nvidia_nx/tensorflow_container_version.jpg">
+
+<center>圖片來源：<a href="https://docs.nvidia.com/deeplearning/frameworks/tensorflow-release-notes/rel_20-01.html" target="_blank" rel="noopener">nvidia deep learning frameworks docs</a></center>
+<br>
+
+<p>對照看上圖，不過最終我是直接進入 <a href="https://developer.download.nvidia.com/compute/redist/jp/v44" target="_blank" rel="noopener">https://developer.download.nvidia.com/compute/redist/jp/v44</a> 這個網址，直接看目前提供的 wheel 有沒有和我需求的版本號對的上。 v42 會區分 tensorflow 或 tensorflow-gpu，不過 v44 好像就沒這區別了，印象中爬其他文的時候，好像有看到在某個版本後若沒有對到 gpu 會自動降到 cpu 這樣的字眼。因此這裡我就直接用上了。</p>
+<br>
+
+<p><strong>Reference</strong></p>
+<ul>
+<li><p><a href="https://tensorflow.google.cn/install/source" target="_blank" rel="noopener">tensorflow 和 CUDA 版本對應表</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/u012388993/article/details/102573117" target="_blank" rel="noopener">解決找不到 libcudart.so.10.x 問題</a></p>
+</li>
+<li><p><a href="https://forums.developer.nvidia.com/t/official-tensorflow-for-jetson-agx-xavier/65523" target="_blank" rel="noopener">Official TensorFlow for Jetson AGX Xavier</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/CCCCXXXXGGGG/article/details/104140608" target="_blank" rel="noopener">安裝 tutorial</a></p>
+</li>
+</ul>
+<br>
+
+<p>上一篇是 nvidia jetson nx 上使用 virtualenv 搭建 opencv-python 環境。</p>
 
       
     </div>
@@ -438,6 +521,15 @@
 
     <footer class="post-footer">
       
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Jetson-NX/" rel="tag"># Jetson NX</a>
+          
+        </div>
+      
 
       
       
@@ -447,15 +539,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2020/08/17/nvidia nx 使用 virtualenv 搭建 opencv-python/" rel="next" title="Nvidia Jetson NX 系列 01.使用 virtualenv 搭建 opencv-python 環境">
+                <i class="fa fa-chevron-left"></i> Nvidia Jetson NX 系列 01.使用 virtualenv 搭建 opencv-python 環境
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/08/Gitlab CI 調用遠端 script 更新伺服器網頁/" rel="prev" title="Gitlab CI 更新遠端伺服器網頁">
-                Gitlab CI 更新遠端伺服器網頁 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -497,17 +589,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -605,23 +688,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       

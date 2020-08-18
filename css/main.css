@@ -200,7 +200,7 @@ h6 {
   font-size: 12px;
 }
 p {
-  margin: 0 0 20px 0;
+  margin: 0 0 15px 0;
 }
 a,
 span.exturl {
@@ -1639,7 +1639,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #0d6ecf;
+  background: #cf9aff;
 }
 .feed-link,
 .chat {

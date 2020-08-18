@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-TW">
+<html class="theme-next mist use-motion" lang="en">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -92,9 +92,9 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: '複製',
-      copy_success: '複製成功',
-      copy_failure: '複製失敗'
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
     }
   };
 </script>
@@ -104,7 +104,7 @@
 <meta property="og:title" content="小菜雞在市場走跳">
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="小菜雞在市場走跳">
-<meta property="og:locale" content="zh-TW">
+<meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小菜雞在市場走跳">
 
@@ -166,7 +166,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
   
@@ -198,7 +198,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="切換導航欄">
+    <button aria-label="Toggle navigation bar">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -225,7 +225,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -241,7 +241,7 @@
 
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>標籤</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
 
   </li>
         
@@ -257,7 +257,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
         
@@ -273,7 +273,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>歸檔</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
 
@@ -305,6 +305,353 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+        
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/nvidia nx 搭建 tensorflow 環境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="C.C. Yang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小菜雞在市場走跳">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/08/17/nvidia nx 搭建 tensorflow 環境/" class="post-title-link" itemprop="url">Nvidia Jetson NX 系列 02.搭建 tensorflow-gpu 環境</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-08-17 15:19:29" itemprop="dateCreated datePublished" datetime="2020-08-17T15:19:29+08:00">2020-08-17</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-08-18 15:56:39" itemprop="dateModified" datetime="2020-08-18T15:56:39+08:00">2020-08-18</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習紀錄/" itemprop="url" rel="index"><span itemprop="name">學習紀錄</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>這篇承接上一個 opencv 安裝的內容，這次要繼續把 tensorflow 的環境弄好。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/08/17/nvidia nx 搭建 tensorflow 環境/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/nvidia nx 使用 virtualenv 搭建 opencv-python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="C.C. Yang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小菜雞在市場走跳">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/08/17/nvidia nx 使用 virtualenv 搭建 opencv-python/" class="post-title-link" itemprop="url">Nvidia Jetson NX 系列 01.使用 virtualenv 搭建 opencv-python 環境</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-08-17 15:19:29" itemprop="dateCreated datePublished" datetime="2020-08-17T15:19:29+08:00">2020-08-17</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-08-18 16:09:20" itemprop="dateModified" datetime="2020-08-18T16:09:20+08:00">2020-08-18</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習紀錄/" itemprop="url" rel="index"><span itemprop="name">學習紀錄</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>這次專案是一個交通的 computer vision 案子，需要在 edge 端搭建 inference 模型要使用的環境。</p>
+<p>Edge 端的機器是 <a href="https://www.nvidia.com/zh-tw/autonomous-machines/embedded-systems/jetson-xavier-nx/" target="_blank" rel="noopener">Jetson Xavier NX</a>，機台內部的初始環境是別人用好的 ubuntu 環境，支援 GPU；inference 的 python code 使用 tf.keras，所以環境需要有 tensorflow，另外也需要 opencv 的函式庫。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/08/17/nvidia nx 使用 virtualenv 搭建 opencv-python/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
     
         
 
@@ -357,14 +704,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">發表於</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="創建時間：2020-08-08 14:19:43" itemprop="dateCreated datePublished" datetime="2020-08-08T14:19:43+08:00">2020-08-08</time>
+              <time title="Created: 2020-08-08 14:19:43" itemprop="dateCreated datePublished" datetime="2020-08-08T14:19:43+08:00">2020-08-08</time>
             </span>
           
 
@@ -377,9 +724,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">更新於</span>
+                  <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="修改時間：2020-08-11 09:25:49" itemprop="dateModified" datetime="2020-08-11T09:25:49+08:00">2020-08-11</time>
+                <time title="Modified: 2020-08-18 15:47:21" itemprop="dateModified" datetime="2020-08-18T15:47:21+08:00">2020-08-18</time>
               </span>
             
           
@@ -390,7 +737,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分類於</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習心得/" itemprop="url" rel="index"><span itemprop="name">學習心得</span></a></span>
@@ -429,31 +776,20 @@
 
       
         
-          
-            <h3>小前言</h3>
+          <h3>小前言</h3>
 其實四週以前，真的沒想到自己會參加 Alpha Camp 課程。
 
 <p>畢業工作一年後，開始無心無力，也分不清楚到底是環境造成的心態消耗還是其實根本不喜歡數據分析，總之茫然期好像突然就這麼到來了。心態消耗造成我對很多事物抱持消極心態，但又恐慌於自己止步於前。</p>
 <p>好像得做些什麼。那時候大概是這樣想的。</p>
-<p>該跳轉領域？還是先點技能樹？</p>
-<p>對軟體工程其實挺有興趣的，嘗試線上自學，Udemy 課程買起來是常態，沒看完也是家常便飯，對課程的幹勁就只停步在初期，工作忙加個班，要安排接下來進度，卻苦惱或是勞累，最終放棄。漸漸意識到，可能這樣的學習方式並不適合我，我需要什麼？</p>
-<p>我需要有人幫忙安排進度，進度會朝著明確的目標邁進；再來是社群，一群人共同學習並且發問，提升學習動力；最後找到 Alpha Camp，令我驚訝的是，這甚至是個進度制的學習方式，助教批改作業也協助解惑，未來的課程裡還有大家共同完成專案的環節。這樣的打包學習最簡便，除了入手快、對正職工作較沒負擔、學習環境提升自己的動力，同時比起自己一個人單打獨鬥想著轉職之外，有一群同儕一起前進則好像更能克服困難。</p>
-<h3>這陣子做了什麼？</h3>
-四週穩定跟著課程學習，從 Javascript、RWD 設計概念、Bootstrap 應用、DOM 操作與事件處理到融合 HTML + CSS + JS 做動態網頁，按部就班與前端技術初步接軌。想到以前剛開始學習調版面但還是弄不好很崩潰、整個人黑人問號，只能說大概是我沒慧根慘不忍睹，經過這學期的練習能稍微克服對 CSS 版面調整的恐懼，對本人來說真的挺開心的。
-
-<p>另外我很喜歡本學期最後技術驗收題組的 Q1，RGB 要轉換成 Hex 的轉換器，看完題目毫不猶豫想挑戰困難版，滑動的 slider 要能隨時更改 RGB 三原色數值以及 Hex 數值，同時更改 background 顏色。花很長的時間在處理版面的位置，過程嘗試要用 grid 還是 flex，各種改寫花我很多時間，歸根究柢是熟練度還是不夠的，並且此次作業內容是這次課程的學習總匯拼盤，同時還要查找資料確定 event 事件寫法和 input range 裡面有哪些 attributes 可以使用，作業完成時真的是滿滿滿成就感。</p>
-<p>總結過去三週半的時間，能夠讓自己持續學習的動力，有一部分來自整個學習環境，有一個很好的資源平台同時跟著進度協助問答的助教，對我這個赧於出口問問題的人而言，其實是挺大的助益，怎麼能放過！尤其看到幾位指標性的同學  (我自己幫幾位很棒的同學貼標籤啦 :P) ，不斷跟著進度，我便更不能落下了！</p>
-<p>其次也算慢慢抓到自己步調，自己有一個比較適切的學習時段和方式，看教材我的專注時間比較短，但如果需要寫 code，則專注力會大大提升、時長會拉長；另外有一週是將作業分配在週一和週六完成的，當週實在太忙，但也驗證我對這種學習方式真的不太行 (哭) ，吸收度不好。</p>
-<p>最後，很高興好像擺脫頹頹的自己，不再回到家就一路耍廢到睡前，這陣子常常在上班前，都會想著今日的學習規劃，下班後則趕緊回家；養成學習習慣，其實挺重要的，充實感轉變成了推進力，多少讓上班也有了活力！有一位轉職成功的 AC 學姊 Yvonne 的講座，影響我的觀念，有一句話直到現在我都還記得，她說：</p>
-<blockquote>
-<p> 沒有路是白走的，每個路都是自己的，四個領域是我 hire 起來並整合出我自己的路。</p>
-</blockquote>
-<p>有想法卻還是止步不前，這樣真的不會有任何改變。參加 AC 後對是否轉職、投注這段學習時間會不會白費都抱有疑惑，但學姊的這段話是個定心丸，當時課程其實已經開始了，我想無論最後有沒有跳轉，曾經學習過的這些內容都會是我的養分，不會白費的，總之我得先做點什麼。偷偷讚嘆一下，很佩服那位學姊是個執行力爆表的規劃狂人。</p>
-<h3>展望展起來</h3>
-對下個階段，有機會的話其實滿期待和其他學員一起完成專案的  (不確定是哪個學期XD) ，當然基本能力要培養起來，同時也要努力保有現在的學習習慣和動力，另外也很期望自己掌握更多前後端技術，就算不能成為後端工程師，好歹也得斜槓槓起來吧！GOGO！
-
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/08/08/AC 學期 2-1： JS 前端開發心得總結/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -545,14 +881,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">發表於</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="創建時間：2019-09-11 15:17:53" itemprop="dateCreated datePublished" datetime="2019-09-11T15:17:53+08:00">2019-09-11</time>
+              <time title="Created: 2019-09-11 15:17:53" itemprop="dateCreated datePublished" datetime="2019-09-11T15:17:53+08:00">2019-09-11</time>
             </span>
           
 
@@ -565,9 +901,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">更新於</span>
+                  <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="修改時間：2019-09-27 14:55:12" itemprop="dateModified" datetime="2019-09-27T14:55:12+08:00">2019-09-27</time>
+                <time title="Modified: 2020-08-18 15:47:54" itemprop="dateModified" datetime="2020-08-18T15:47:54+08:00">2020-08-18</time>
               </span>
             
           
@@ -578,7 +914,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分類於</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習紀錄/" itemprop="url" rel="index"><span itemprop="name">學習紀錄</span></a></span>
@@ -617,41 +953,18 @@
 
       
         
-          
-            <p>最近在模組開發完後需要轉換成 API 的接口服務，當時遇到一些流程問題需要解決，這篇算是探討 Python 的用法吧。</p>
+          <p>最近在模組開發完後需要轉換成 API 的接口服務，當時遇到一些流程問題需要解決，這篇算是探討 Python 的用法吧。</p>
 <p>大概情境如下，模型訓練完成後，正常情況使用者會接續進行預測的動作，但也有可能因為使用者在自己的排程上暫時不需要再行預測，因此會擱置一段時間。在一段時間的靜置後，server 端會把目前 keep 住的模型消滅掉，以避免資源占用，然而當使用者要重啟服務時，重新訓練模型又會是成本，故希望重新將模型 load 回來，再直接進行預測。所以可使用 classmethod 協助我們在實例化之前把必要的資訊重載，並再行實例化。</p>
 <p>上面大概是問題的情境，不甚清楚可以跳過，僅僅算是個紀錄，可直接看下方的內容。</p>
-<h3 id="使用時機"><a href="#使用時機" class="headerlink" title="使用時機"></a>使用時機</h3><p>通常要使用 class 下方的 method 時(指的是我們經常使用的 instance method )，應是要先把這個 class 先給實例化(補一下實例化和把物件初始化，不確定兩者說法是否指同一件事)，完成後便可應用承接了這個實例下的方法，如下面的程式：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TemperatureSimulator</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, sample_rate)</span>:</span></span><br><span class="line">        self.fs = sample_rate</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train_model</span><span class="params">(self, sensor_data)</span>:</span> </span><br><span class="line">        print(<span class="string">'Detect your sample rate is %d'</span>%self.fs)</span><br><span class="line">        print(<span class="string">'I am training model now...'</span>)</span><br><span class="line">        <span class="keyword">return</span> model</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    simulator = TemperatureSimulator(sample_rate=<span class="number">2</span>)</span><br><span class="line">    simulator.train_model(data)</span><br></pre></td></tr></table></figure>
-
-<p>目前開發中最常使用到的就是上述的用法。那麼 classmethod 和 staticmethod 的用法差異在哪？可來看個簡單的範例，重新建立一下概念。</p>
-<h4 id="流程建立"><a href="#流程建立" class="headerlink" title="流程建立"></a>流程建立</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassA</span>:</span></span><br><span class="line">    attrB = <span class="number">5</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">instance_method</span><span class="params">(self, n)</span>:</span> <span class="comment"># 我們最常使用的method方式，默認第一個參數self是instance本身</span></span><br><span class="line">        print(n)</span><br><span class="line">    </span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">class_method</span><span class="params">(cls, n)</span>:</span> <span class="comment"># 默認第一個參數是class</span></span><br><span class="line">        print(n)</span><br><span class="line">    </span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">static_method</span><span class="params">(n)</span>:</span> <span class="comment"># 指傳入自定義的參數即可</span></span><br><span class="line">        print(n)</span><br><span class="line"></span><br><span class="line">a = ClassA()</span><br><span class="line">a.instance_method(<span class="number">1</span>) <span class="comment"># self: &lt;__main__.A object at 0x00000122EA903908&gt;</span></span><br><span class="line">ClassA.class_method(<span class="number">1</span>) <span class="comment"># cls: &lt;class '__main__.ClassA'&gt;</span></span><br><span class="line">ClassA.static_method(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<p>首先，程式碼會在第一段先執行 ClassA 下面的程式碼，創建一個 ClassA 的 class object，同時初始化裡面的attribute 和 method。</p>
-<p>再來到了<code>a = ClassA()</code>時，才是進行實例化，這時會創建 instance object，而這個 a 會指向這個 instance object。調用<code>a.instance_method(1)</code>時，因為這是一個 instance method，所以 self 參數會與剛剛的 instance object 綁定(總之這時候 a 和 self 都指向同一個地方)。</p>
-<p>最後在<code>ClassA.class_method(1)</code>被使用時，cls 則是指向了剛剛提到的 class object。而 <code>ClassA.static_method(1)</code>則是永遠指向同一個記憶體位置，也就是無論創建了多少實例，它的記憶體位置是永不變的。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 1. 實體方法已實體化後綁定</span></span><br><span class="line">ClassA.instance_method(<span class="number">1</span>) </span><br><span class="line"><span class="comment"># &lt;function ClassA.instance_method at 0x00000122EA8D4620&gt;</span></span><br><span class="line">a = ClassA()</span><br><span class="line">a.instance_method(<span class="number">1</span>) </span><br><span class="line"><span class="comment"># &lt;bound method ClassA.instance_method of &lt;__main__.ClassA object at 0x00000122EA903908&gt;&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### 2. 靜態方法的位置不隨實體物件改變</span></span><br><span class="line">a1 = ClassA()</span><br><span class="line">a2 = ClassA()</span><br><span class="line"></span><br><span class="line">a1.static_method <span class="comment"># &lt;function ClassA.static_method at 0x00000122EA8D4E18&gt;</span></span><br><span class="line">a2.static_method <span class="comment"># &lt;function ClassA.static_method at 0x00000122EA8D4E18&gt;</span></span><br><span class="line"></span><br><span class="line">a1.instance_method <span class="comment"># &lt;bound method ClassA.instance_method of &lt;__main__.ClassA object at 0x00000122EA903978&gt;&gt;</span></span><br><span class="line">a2.instance_method <span class="comment"># &lt;bound method ClassA.instance_method of &lt;__main__.ClassA object at 0x00000122EA903A90&gt;&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 3. 類方法就是綁定類物件</span></span><br><span class="line">ClassA.class_method <span class="comment"># &lt;bound method ClassA.class_method of &lt;class '__main__.ClassA'&gt;&gt;</span></span><br><span class="line">a1.class_method <span class="comment"># &lt;bound method ClassA.class_method of &lt;class '__main__.ClassA'&gt;&gt;</span></span><br><span class="line">a2.class_method <span class="comment"># &lt;bound method ClassA.class_method of &lt;class '__main__.ClassA'&gt;&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>簡單來說，static method 的使用時機可以是在當這個方法裡不需要有 self 或是 cls 時，使用靜態方法能夠比較有效的完成工作，既不需要接收用不到的參數，另外效率也會好一些，因為 instance method，會在實際要使用它時才生成，然而 static method 不會有這個問題。</p>
-<p>然而個人目前使用上的經驗來看，雖然感受上有點雞肋，因為常常開發時總歸大多還是使用 instance method，若遇到這種靜態的狀況，又可以以直接建立 function 的方式去進行，也就是該 function 和 class 包在同一個 module 下，可是實際上若考量到程式編寫時的架構性，當某一個方法雖然不需傳入 self 或 cls，仍然將<strong>該方法歸屬於它要服務的那個類之下</strong>，是非常有助於程式的可讀性的。</p>
-<h3 id="使用實例"><a href="#使用實例" class="headerlink" title="使用實例"></a>使用實例</h3><p>但是在開發階段會遇到一些狀況，例如說我其實根本不需要承接實例化，可是這個方法的整體概念是要在這個 class 下進行的，那麼這個時候就可以使用 staticmethod。只要在 method 前面加上裝飾器 @staticmethod 即可，如下面的程式：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TemperatureSimulator</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, sample_rate)</span>:</span></span><br><span class="line">        self.fs = sample_rate</span><br><span class="line">        </span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_preprocessed_data</span><span class="params">(data)</span>:</span></span><br><span class="line">        print(<span class="string">'Data preprocessing...'</span>)</span><br><span class="line">        <span class="keyword">return</span> preprocessed_data</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    simulator = TemperatureSimulator(sample_rate=<span class="number">2</span>)</span><br><span class="line">    new_date = simulator.get_preprocessed_data(data)</span><br></pre></td></tr></table></figure>
-
-<p>那麼在剛剛提到這次 API 遇到的問題則是 model 重啟的問題，便是藉由 classmethod 內部先行準備好要實例化時 initial 的數據，再將整個物件實例化並傳出，如下面的程式：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TemperatureSimulator</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, sample_rate)</span>:</span></span><br><span class="line">        self.fs = sample_rate</span><br><span class="line">        </span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">load_model</span><span class="params">(cls, load_path)</span>:</span></span><br><span class="line">        print(<span class="string">'Loading info from load_path...'</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> cls(fs_from_loaded_info)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    simulator = TemperatureSimulator.load_model(<span class="string">'our_path'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>如同上述的內容，其實就可以清晰的區分使用時機。</p>
-<p>reference:</p>
-<ul>
-<li><p><a href="https://julien.danjou.info/guide-python-static-class-abstract-methods/" target="_blank" rel="noopener">https://julien.danjou.info/guide-python-static-class-abstract-methods/</a></p>
-</li>
-<li><p><a href="https://kknews.cc/zh-tw/news/j6ljo5l.html" target="_blank" rel="noopener">https://kknews.cc/zh-tw/news/j6ljo5l.html</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/28010894" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/28010894</a></p>
-</li>
-</ul>
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/11/Python之classmethod和staticmethod的區別/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -743,14 +1056,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">發表於</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="創建時間：2019-09-08 13:19:56" itemprop="dateCreated datePublished" datetime="2019-09-08T13:19:56+08:00">2019-09-08</time>
+              <time title="Created: 2019-09-08 13:19:56" itemprop="dateCreated datePublished" datetime="2019-09-08T13:19:56+08:00">2019-09-08</time>
             </span>
           
 
@@ -763,9 +1076,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">更新於</span>
+                  <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="修改時間：2019-09-27 15:09:05" itemprop="dateModified" datetime="2019-09-27T15:09:05+08:00">2019-09-27</time>
+                <time title="Modified: 2020-08-18 15:47:35" itemprop="dateModified" datetime="2020-08-18T15:47:35+08:00">2020-08-18</time>
               </span>
             
           
@@ -776,7 +1089,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分類於</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習紀錄/" itemprop="url" rel="index"><span itemprop="name">學習紀錄</span></a></span>
@@ -815,97 +1128,18 @@
 
       
         
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>對於 Gtilab、git 指令或者寫 script 其實都並不是很熟，這次花了一些時間進行部署，希望能寫下來當作學習筆記，也方便未來複習。</p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>對於 Gtilab、git 指令或者寫 script 其實都並不是很熟，這次花了一些時間進行部署，希望能寫下來當作學習筆記，也方便未來複習。</p>
 <p>想解決的問題是：在 Gitlab 上進行開發，當開發到一個新的版本後，就需要使用 sphinx 將編寫的程式碼及使用文件轉換成 HTML 格式，並將轉換完成的網頁更新到 nginx server上，最後重啟 nginx 的 docker。然而每次都需要人工進行這項操作，覺得實在太不自動化，因此想借助 CI 完成這個流程。</p>
 <p>這裡用docker架設的 Gitlab server 和 nginx server 是在不同的兩台機器運作的喔！</p>
-<h2 id="關於-Gitlab-CI-的概念"><a href="#關於-Gitlab-CI-的概念" class="headerlink" title="關於 Gitlab CI 的概念"></a>關於 Gitlab CI 的概念</h2><p>開始使用前，少不了需要研究整個運作架構。</p>
-<h3 id="Gitlab-CI-amp-Gitlab-Runner"><a href="#Gitlab-CI-amp-Gitlab-Runner" class="headerlink" title="Gitlab CI &amp; Gitlab Runner"></a>Gitlab CI &amp; Gitlab Runner</h3><p>Gitlab CI 由 Gitlab 自帶，是能進行持續集成的系統，我們需要在 Gitlab 專案裡放置 .gitlab-ci.yml，Gitlab CI 會對裡面的腳本(script)進行解析，並且調用 Gitlab Runner 來運作腳本裡的內容。</p>
-<p>簡單來說，Gitlab CI 是管理者，用來管理每個項目的構建狀態。</p>
-<p>而建構任務會耗費系統資源，Gitlab CI 本身就是 Gitlab 的一部份，為了不使 Gitlab 性能下降，通常建議整個建構的任務，交由 Runner 來執行，並且使 Runner 運作於與 Gitlab server 不同的機台上。</p>
-<p>.gitlab-ci.yml 裡面則編寫不同階段和執行規則，由 Gitlab CI 來進行解讀。</p>
-<h3 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h3><p>一次Pipeline等於一次的構建任務，裡面可以包含不同階段，例如運行測試、進行佈署等等。當進行git push後，則可以觸發(trigger) Pipeline。</p>
-<h3 id="Stages"><a href="#Stages" class="headerlink" title="Stages"></a>Stages</h3><p>Stages 便是剛剛提到在 Pipeline 中，不同的任務階段，我們可以在 Pipeline 中去定義這些 Stages，並且 Stages 會有以下的特點：</p>
-<ul>
-<li>所有 Stages 會按照指定的順序依序運行</li>
-<li>任一個 Stage 只要運行失敗，則該構建任務 (Pipeline) 當即停止，並且該構建任務；反之，全部 Stages 運行成功，則 Pipeline 成功。</li>
-</ul>
-<h3 id="Jobs"><a href="#Jobs" class="headerlink" title="Jobs"></a>Jobs</h3><p>Jobs 表示在 Stage 裡面執行的工作。在 Stages 內可以有複數個 Jobs，並且會有以下的特點：</p>
-<ul>
-<li>相同 Stage 的 Job 會同時執行</li>
-<li>任一個 Job 只要運行失敗，則該 Stage 失敗，連動 Pipeline 失敗；反之全部成功，則 Pipeline 成功。</li>
-</ul>
-<p>上述內容的參考資料在附註1，裡面有附圖，個人很喜歡這篇簡潔清楚的介紹。</p>
-<h2 id="Gitlab-CI-建置流程"><a href="#Gitlab-CI-建置流程" class="headerlink" title="Gitlab CI 建置流程"></a>Gitlab CI 建置流程</h2><h3 id="建置-Gitlab-Runner"><a href="#建置-Gitlab-Runner" class="headerlink" title="建置 Gitlab Runner"></a>建置 Gitlab Runner</h3><p>前述提過，真正要執行腳本還得依靠 Runner，因此我們選擇在架設 nginx 伺服器的這台機器  (系統環境 ubuntu 18.04) 上，將 Runner 給架設起來。</p>
-<h4 id="Step-1-安裝-Gitlab-Runner"><a href="#Step-1-安裝-Gitlab-Runner" class="headerlink" title="Step 1. 安裝 Gitlab Runner"></a>Step 1. 安裝 Gitlab Runner</h4><p>下載 Gitlab Runner 並裝到指定目錄去：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -O /usr/<span class="built_in">local</span>/bin/gitlab-runner</span><br><span class="line">https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64</span><br></pre></td></tr></table></figure>
-
-<p>給 Gitlab Runner 添加執行權限：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/gitlab-runner</span><br></pre></td></tr></table></figure>
-
-<p>創建 Gitlab Runner 的帳號：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd --comment <span class="string">'GitLab Runner'</span> --create-home gitlab-runner --shell /bin/bash</span><br></pre></td></tr></table></figure>
-
-<p>安裝並啟用服務：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner</span><br><span class="line">sudo gitlab-runner start</span><br></pre></td></tr></table></figure>
-
-<h4 id="Step-2-註冊-Gitlab-Runner"><a href="#Step-2-註冊-Gitlab-Runner" class="headerlink" title="Step 2. 註冊 Gitlab Runner"></a>Step 2. 註冊 Gitlab Runner</h4><p>運行以下命令並開始註冊：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gitlab-runner register</span><br></pre></td></tr></table></figure>
-
-<p>待會註冊時使用的 token 可以在 Gitlab 介面的 Setting -&gt; CI/CD 裡面找到。</p>
-<ul>
-<li>Specific Runner - 該 Runner 指定具體某個專案才可使用</li>
-<li>Shared Runner - 該 Runner 所有專案都可以使用 (Overview -&gt; CI/CD 才會看到Shared Runner的token)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com )</span><br><span class="line">https://xxxxxxxxx/</span><br><span class="line"></span><br><span class="line"># 根據需求是要Specific Runner或Shared Runner，填入對應的token</span><br><span class="line">Please enter the gitlab-ci token for this runner</span><br><span class="line">xxxxxxx</span><br><span class="line"></span><br><span class="line"># 輸入Runner的描述，後續可在GitLab的UI變更內容</span><br><span class="line">Please enter the gitlab-ci description for this runner</span><br><span class="line">[hostame]: the-description-you-like</span><br><span class="line"></span><br><span class="line"># 設定tags，後續可在GitLab變更，未來編寫腳本會需要使用到這個tag</span><br><span class="line">Please enter the gitlab-ci tags for this runner (comma separated):</span><br><span class="line">your-setting-tag</span><br><span class="line"></span><br><span class="line"># 選擇Runner的執行者(executor)</span><br><span class="line">Please enter the executor: ssh, docker+machine, docker-ssh+machine, kubernetes, docker, parallels, virtualbox, docker-ssh, shell:</span><br><span class="line">docker</span><br><span class="line"></span><br><span class="line"># 上個步驟選用docker才會有這一步</span><br><span class="line">Please enter the Docker image (eg. ruby:2.1):</span><br><span class="line">alpine:latest</span><br></pre></td></tr></table></figure>
-
-<p>大概需要注意的是，安裝 Gitlab Runner 的這台機器也需要安裝 Git，否則後續運作會有問題，另外最後的 Docker image 不知道填什麼，就填 alpine 吧，因為 alpine 是 CI 默認的部署 docker image。</p>
-<p>整個註冊流程完成後，可以在 Gitlab UI 看到下圖中紅色方框圈起來的部分，若註冊的是 Specific Runners，那麼會產生左邊的方框內容。詳情可對照下圖。</p>
-<img src="/images/gitlab_ci/gitlab_token.png" width="100%">
-
-
-
-<h3 id="撰寫-gitlab-ci-yml"><a href="#撰寫-gitlab-ci-yml" class="headerlink" title="撰寫 .gitlab-ci.yml"></a>撰寫 .gitlab-ci.yml</h3><p>撰寫這份文件想讓 gitlab CI 進行的事情其實很簡單，大概的思路便是將整段流程拆成兩個部分，第一部分是撰寫 .gitlab-ci.yml 裡的腳本，腳本會先建立連線至 nignx server 那台，並且將 gitlab 專案的內容 scp 傳送到 nignx server，並且啟動在 nginx server 上的腳本；第二部分就是完成剛剛提到在 nignx server 上的腳本，這個腳本會去運行後半段的所有事情，也就是執行 nginx server 上的 sphinx，產出 html 後再放置到 nginx server 的目錄下，最後重啟docker。</p>
-<p>腳本內容如下：</p>
- <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">image:</span> <span class="string">ubuntu</span> </span><br><span class="line"></span><br><span class="line"><span class="attr">stages:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">deploy</span></span><br><span class="line"></span><br><span class="line"><span class="attr">before_script:</span></span><br><span class="line">  <span class="comment">## Install ssh-agent if not already installed, it is required by Docker.</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">'which ssh-agent || ( apt-get update -y &amp;&amp; apt-get install openssh-client -y )'</span></span><br><span class="line">  <span class="comment">## Run ssh-agent (inside the build environment)</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">eval</span> <span class="string">$(ssh-agent</span> <span class="bullet">-s)</span></span><br><span class="line">  </span><br><span class="line"><span class="bullet">  -</span> <span class="string">mkdir</span> <span class="bullet">-p</span> <span class="string">~/.ssh</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">echo</span> <span class="bullet">-e</span> <span class="string">"$SSH_PRIVATE_KEY"</span> <span class="string">&gt; ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">  - chmod 600 ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">  - ssh-add ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">  - '[[ -f /.dockerenv ]] &amp;&amp; echo -e "Host *\n\tStrictHostKeyChecking no\n\n" &gt; ~/.ssh/config'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span><span class="attr">deployment_job:</span></span><br><span class="line"><span class="attr">  stage:</span> <span class="string">deploy</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  script:</span> </span><br><span class="line"><span class="bullet">    -</span> <span class="string">echo</span> <span class="string">$&#123;CI_PROJECT_DIR&#125;</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">scp</span> <span class="bullet">-r</span> <span class="string">$CI_PROJECT_DIR/*</span> <span class="string">at@$DEPLOY_SERVER:$LIB_DIR</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">echo</span> <span class="string">'scp finish.'</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">ssh</span> <span class="string">at@$DEPLOY_SERVER</span> <span class="string">"cd $ROOT_DIR &amp;&amp; ls &amp;&amp; </span></span><br><span class="line"><span class="string">      chmod +x make_html.sh &amp;&amp; </span></span><br><span class="line"><span class="string">      bash make_html.sh"</span></span><br><span class="line">    </span><br><span class="line"><span class="attr">  only:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">feature/sphinx</span></span><br><span class="line">  </span><br><span class="line"><span class="attr">  tags:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">ubuntu-tag</span></span><br></pre></td></tr></table></figure>
-
-<p><a href="https://docs.gitlab.com/ee/ci/ssh_keys/" target="_blank" rel="noopener">GitLab Docs</a> 裡面其實都有滿詳盡的說明，有關鍵字列表，像是上面的 before_script、stage 等等，他們不能被設置為任務名稱，在撰寫這份 yaml 時記得先去看一下列表內容。</p>
-<p>那麼 <code>stages</code> 下放入的就是對應要執行的 stage 順序，而每一個 job (也就是上述的 <code>deplyment_job</code> 下的內容) ，它的 <code>stage</code> 都需要寫上使用者指定的 stage ，<code>only</code> 指定在專案下的哪一個 branch 被 push 時觸發，<code>tags</code> 就是我們前面在註冊時， 給定 runner 的名稱。</p>
-<p>那麼大概需要注意的幾件事情是：</p>
-<ul>
-<li><p>撰寫內容時有可能會需要使用到自定義的環境變量 ( GitLab Docs 左側欄位 CI/CD-&gt;Environment variables 可查找相關訊息 )，像是上面的 <code>$SSH_PRIVATE_KEY</code>，因為這份 yaml 是放在專案上的，如果是公開給所有人知道，那麼有一些比較私密的內容不想被別人知道則可以用設置環境變量的方式進行。</p>
-<img src="/images/gitlab_ci/custom_variable.PNG" width="100%">
-
-<p>Gitlab UI 裡面 (Setting-&gt;CI/CD) 呈現如上述。可在裡面填入變量及對應內容，如 IP 等等。</p>
-</li>
-<li><p>因為需要 ssh 連線，要記得設置公鑰和私鑰。我們要從 Gitlab CI 這裡建立的 container 連線到 nginx server，所以公鑰要記得給到那台 server，而私鑰則保存到我們剛剛提到的自定義環境變量裡面，如下圖。</p>
-<img src="/images/gitlab_ci/private_key.PNG" width="100%">
-
-<p>那這邊網路上教學文也很多，就不提了。大概就是記得公鑰要放入 authorized_keys ，私鑰則直接複製貼上上述欄位裡即可。</p>
-<ul>
-<li><p>另外有一個小坑，要記得設置私鑰的自定義環境變數時，旁邊的 <code>Protected</code> 要關掉，否則 ssh 是無法正確連線到伺服器的。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Pseudo-terminal will not be allocated because stdin is not a terminal.</span><br><span class="line">Warning: Permanently added '&#123;SERVER_IP&#125;' (ECDSA) to the list of known hosts.</span><br><span class="line">Permission denied, please try again.</span><br><span class="line">Permission denied, please try again.</span><br><span class="line">Permission denied (publickey,password).</span><br><span class="line">ERROR: Job failed: exit code 1</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>在 script 裡面寫的指令，要注意 <code>image</code> 的裝設的是哪個環境，例如如果有用到 apt-get 這類的，在 alphine 下，這類指令是不能運作的。</p>
-</li>
-<li><p>另外，我們在 nginx server 的 scipt 裡面需要啟動 conda 環境，但不知道為什麼一直會報錯，下面附圖是在 gitlab CI 執行時報的錯誤，在 conda activate 時會找不到 conda 指令。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash: conda: <span class="built_in">command</span> not found</span><br><span class="line">ERROR: Job failed: <span class="built_in">exit</span> code 1</span><br></pre></td></tr></table></figure>
-
-<p>這部份猜測有可能是連線過去後，用 ssh 的連線方式無法拉到 <code>.bashrc</code> 的內容，所以找不到 conda，解決方式是把環境的路徑 <code>export PATH=&quot;/my_route/anaconda3/bin:$PATH&quot;</code> 直接設置在 script 的最上面。</p>
-</li>
-</ul>
-<p>運行過程中，零零總總還是有遇到各式各樣的 bug，像一開始其實是想要在 gitlab CI runner 上直接運行兩份腳本的所有內容，但是發現的問題是我們自己的 package requirement.txt 需要很多套件安裝，sphinx 要產生檔案時也需要時間，整體 runner 到執行結束就會運作很久，因此才想改成後來這個方案。</p>
-<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>並且這份文件大概是 Gitlab CI 用好後，又隔了一陣子才寫，所以有些遇到的問題大概也不是記得特別清楚。那麼總之，我對於目前整體的運作理解就做個小總結，其實好像還是有想不太清楚的地方：runner 雖然是架設在 remote server 上，但是由 Gitlab CI 開始指派 runner 運作時，因為我的 runner 的執行者選擇的是 docker，所以會在 remote server上運作一個 container，該 container 下會有我的專案內容，大概是如此。只是我很困惑的點是，明明都是在同一台電腦 (就是那台 remote server) 裡運作 container，那為何不能直接指向伺服器路徑裡的特定檔案就好？還得依靠 ssh 連線到這台電腦執行 script… 總覺得自己好像繞了遠路。</p>
-<p>那最後有什麼錯誤或者觀念不理解的地方麻煩賜教。</p>
-<p>reference:</p>
-<ul>
-<li><a href="https://scarletsky.github.io/2016/07/29/use-gitlab-ci-for-continuous-integration/" target="_blank" rel="noopener">https://scarletsky.github.io/2016/07/29/use-gitlab-ci-for-continuous-integration/</a></li>
-<li><a href="https://docs.gitlab.com/" target="_blank" rel="noopener">https://docs.gitlab.com/</a></li>
-</ul>
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/08/Gitlab CI 調用遠端 script 更新伺服器網頁/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -997,14 +1231,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">發表於</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="創建時間：2019-07-27 11:16:33" itemprop="dateCreated datePublished" datetime="2019-07-27T11:16:33+08:00">2019-07-27</time>
+              <time title="Created: 2019-07-27 11:16:33" itemprop="dateCreated datePublished" datetime="2019-07-27T11:16:33+08:00">2019-07-27</time>
             </span>
           
 
@@ -1139,8 +1373,8 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
-          <span class="site-state-item-name">文章</span>
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
         </a>
       </div>
     
@@ -1161,7 +1395,7 @@
           
         
         <span class="site-state-item-count">2</span>
-        <span class="site-state-item-name">分類</span>
+        <span class="site-state-item-name">categories</span>
         </a>
       </div>
     
@@ -1185,8 +1419,20 @@
         
           
         
-        <span class="site-state-item-count">4</span>
-        <span class="site-state-item-name">標籤</span>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
         </a>
       </div>
     
@@ -1236,7 +1482,7 @@
 </div>
 
 
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v3.9.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
 
 
 
@@ -1244,7 +1490,7 @@
 
 
 
-  <div class="theme-info">主題 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.2.0</div>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.2.0</div>
 
 
 

@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-TW">
+<html class="theme-next mist use-motion" lang="en">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -92,9 +92,9 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: '複製',
-      copy_success: '複製成功',
-      copy_failure: '複製失敗'
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
     }
   };
 </script>
@@ -106,11 +106,11 @@
 <meta property="og:url" content="http://yoursite.com/2019/09/08/Gitlab CI 調用遠端 script 更新伺服器網頁/index.html">
 <meta property="og:site_name" content="小菜雞在市場走跳">
 <meta property="og:description" content="前言對於 Gtilab、git 指令或者寫 script 其實都並不是很熟，這次花了一些時間進行部署，希望能寫下來當作學習筆記，也方便未來複習。 想解決的問題是：在 Gitlab 上進行開發，當開發到一個新的版本後，就需要使用 sphinx 將編寫的程式碼及使用文件轉換成 HTML 格式，並將轉換完成的網頁更新到 nginx server上，最後重啟 nginx 的 docker。然而每次都需要人">
-<meta property="og:locale" content="zh-TW">
+<meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/images/gitlab_ci/gitlab_token.png">
 <meta property="og:image" content="http://yoursite.com/images/gitlab_ci/custom_variable.PNG">
 <meta property="og:image" content="http://yoursite.com/images/gitlab_ci/private_key.PNG">
-<meta property="og:updated_time" content="2019-09-27T07:09:05.362Z">
+<meta property="og:updated_time" content="2020-08-18T07:47:35.789Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gitlab CI 更新遠端伺服器網頁">
 <meta name="twitter:description" content="前言對於 Gtilab、git 指令或者寫 script 其實都並不是很熟，這次花了一些時間進行部署，希望能寫下來當作學習筆記，也方便未來複習。 想解決的問題是：在 Gitlab 上進行開發，當開發到一個新的版本後，就需要使用 sphinx 將編寫的程式碼及使用文件轉換成 HTML 格式，並將轉換完成的網頁更新到 nginx server上，最後重啟 nginx 的 docker。然而每次都需要人">
@@ -174,7 +174,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
   
@@ -205,7 +205,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="切換導航欄">
+    <button aria-label="Toggle navigation bar">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -232,7 +232,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -248,7 +248,7 @@
 
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>標籤</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
 
   </li>
         
@@ -264,7 +264,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
         
@@ -280,7 +280,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>歸檔</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
 
@@ -362,14 +362,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">發表於</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="創建時間：2019-09-08 13:19:56" itemprop="dateCreated datePublished" datetime="2019-09-08T13:19:56+08:00">2019-09-08</time>
+              <time title="Created: 2019-09-08 13:19:56" itemprop="dateCreated datePublished" datetime="2019-09-08T13:19:56+08:00">2019-09-08</time>
             </span>
           
 
@@ -382,9 +382,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">更新於</span>
+                  <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="修改時間：2019-09-27 15:09:05" itemprop="dateModified" datetime="2019-09-27T15:09:05+08:00">2019-09-27</time>
+                <time title="Modified: 2020-08-18 15:47:35" itemprop="dateModified" datetime="2020-08-18T15:47:35+08:00">2020-08-18</time>
               </span>
             
           
@@ -395,7 +395,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分類於</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習紀錄/" itemprop="url" rel="index"><span itemprop="name">學習紀錄</span></a></span>
@@ -436,6 +436,8 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>對於 Gtilab、git 指令或者寫 script 其實都並不是很熟，這次花了一些時間進行部署，希望能寫下來當作學習筆記，也方便未來複習。</p>
 <p>想解決的問題是：在 Gitlab 上進行開發，當開發到一個新的版本後，就需要使用 sphinx 將編寫的程式碼及使用文件轉換成 HTML 格式，並將轉換完成的網頁更新到 nginx server上，最後重啟 nginx 的 docker。然而每次都需要人工進行這項操作，覺得實在太不自動化，因此想借助 CI 完成這個流程。</p>
 <p>這裡用docker架設的 Gitlab server 和 nginx server 是在不同的兩台機器運作的喔！</p>
+<a id="more"></a>
+
 <h2 id="關於-Gitlab-CI-的概念"><a href="#關於-Gitlab-CI-的概念" class="headerlink" title="關於 Gitlab CI 的概念"></a>關於 Gitlab CI 的概念</h2><p>開始使用前，少不了需要研究整個運作架構。</p>
 <h3 id="Gitlab-CI-amp-Gitlab-Runner"><a href="#Gitlab-CI-amp-Gitlab-Runner" class="headerlink" title="Gitlab CI &amp; Gitlab Runner"></a>Gitlab CI &amp; Gitlab Runner</h3><p>Gitlab CI 由 Gitlab 自帶，是能進行持續集成的系統，我們需要在 Gitlab 專案裡放置 .gitlab-ci.yml，Gitlab CI 會對裡面的腳本(script)進行解析，並且調用 Gitlab Runner 來運作腳本裡的內容。</p>
 <p>簡單來說，Gitlab CI 是管理者，用來管理每個項目的構建狀態。</p>
@@ -620,10 +622,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目錄
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            本站概要
+            Overview
           </li>
         </ul>
       
@@ -644,8 +646,8 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
-          <span class="site-state-item-name">文章</span>
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
         </a>
       </div>
     
@@ -666,7 +668,7 @@
           
         
         <span class="site-state-item-count">2</span>
-        <span class="site-state-item-name">分類</span>
+        <span class="site-state-item-name">categories</span>
         </a>
       </div>
     
@@ -690,8 +692,20 @@
         
           
         
-        <span class="site-state-item-count">4</span>
-        <span class="site-state-item-name">標籤</span>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
         </a>
       </div>
     
@@ -758,7 +772,7 @@
 </div>
 
 
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v3.9.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
 
 
 
@@ -766,7 +780,7 @@
 
 
 
-  <div class="theme-info">主題 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.2.0</div>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.2.0</div>
 
 
 
