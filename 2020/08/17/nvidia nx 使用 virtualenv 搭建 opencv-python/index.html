@@ -107,13 +107,13 @@
 <meta property="og:site_name" content="小菜雞在市場走跳">
 <meta property="og:description" content="這次專案是一個交通的 computer vision 案子，需要在 edge 端搭建 inference 模型要使用的環境。 Edge 端的機器是 Jetson Xavier NX，機台內部的初始環境是別人用好的 ubuntu 環境，支援 GPU；inference 的 python code 使用 tf.keras，所以環境需要有 tensorflow，另外也需要 opencv 的函式庫。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/images/nvidia_nx/wrong_msg.jpg">
-<meta property="og:image" content="http://yoursite.com/images/nvidia_nx/cv2.so_position.jpg">
-<meta property="og:updated_time" content="2020-08-18T08:09:20.692Z">
+<meta property="og:image" content="http://yoursite.com/images/nvidia_nx/wrong_msg.JPG">
+<meta property="og:image" content="http://yoursite.com/images/nvidia_nx/cv2.so_position.JPG">
+<meta property="og:updated_time" content="2020-08-18T08:31:33.805Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nvidia Jetson NX 系列 01.使用 virtualenv 搭建 opencv-python 環境">
 <meta name="twitter:description" content="這次專案是一個交通的 computer vision 案子，需要在 edge 端搭建 inference 模型要使用的環境。 Edge 端的機器是 Jetson Xavier NX，機台內部的初始環境是別人用好的 ubuntu 環境，支援 GPU；inference 的 python code 使用 tf.keras，所以環境需要有 tensorflow，另外也需要 opencv 的函式庫。">
-<meta name="twitter:image" content="http://yoursite.com/images/nvidia_nx/wrong_msg.jpg">
+<meta name="twitter:image" content="http://yoursite.com/images/nvidia_nx/wrong_msg.JPG">
 
 
 
@@ -383,7 +383,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-08-18 16:09:20" itemprop="dateModified" datetime="2020-08-18T16:09:20+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 16:31:33" itemprop="dateModified" datetime="2020-08-18T16:31:33+08:00">2020-08-18</time>
               </span>
             
           
@@ -439,23 +439,19 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">opencv-contrib-python</span><br><span class="line">opencv-python</span><br><span class="line">Keras</span><br><span class="line">tensorflow-gpu</span><br></pre></td></tr></table></figure>
 
 <p>為了環境乾淨，原本就要把環境割離開來，不外乎的作法看能不能使用 conda 或 virtualenv，但 NX 是不支援安裝 anaconda 的，所以原先在遠端機器訓練模型用的環境不能直接移植過來。幫忙搭建 ubuntu 環境的人建議看要不要用用看 docker，所以在嘗試 virtualenv 之前，我是先用個 Dockerfile 建看看，果不其然 build image 時就遇到以下問題：</p>
-<img src="/images/nvidia_nx/wrong_msg.jpg">
+<img src="/images/nvidia_nx/wrong_msg.JPG">
 
 <blockquote>
 <p> No matching distribution found for opencv-contrib-python</p>
 </blockquote>
 <p>報錯位置在 Dockerfile <code>pip install -r requirement.txt</code> 安裝套件，就算不用 docker 也一樣 <code>pip install</code> 就會遇到這個報錯，然後應該是找不到 opencv-contrib，這時候我同事聽到表示也很有可能，畢竟 opencv 是 intel 開發的…… 好吧，大佬們這樣也挺合理啦 (摀臉)。</p>
 <p>反正爬個文後，確實 opencv 是沒有提供模組給 ARM (<a href="https://forums.developer.nvidia.com/t/how-to-install-opencv-contrib-python-on-xavier/76549" target="_blank" rel="noopener">參考連結</a>)，正好官方也給個解釋，要在人家產品上裝另一家的模組，那就乖乖從 source build 起來吧。</p>
-<h3>開工</h3>
-綜合上述，碰壁後最後決定嘗試 python 提供的 virtualenv，沒有用過，但操作上可能和 conda 差不多吧？ Docker 還要撰寫 Dockerfile，且 build resource 的過程感覺都還會遇到不可解的問題，所以 docker 方法我就果斷放棄了。
-
+<h3 id="開工"><a href="#開工" class="headerlink" title="開工"></a>開工</h3><p>綜合上述，碰壁後最後決定嘗試 python 提供的 virtualenv，沒有用過，但操作上可能和 conda 差不多吧？ Docker 還要撰寫 Dockerfile，且 build resource 的過程感覺都還會遇到不可解的問題，所以 docker 方法我就果斷放棄了。</p>
 <p>virtualenv 我自己看覺得<a href="https://zhuanlan.zhihu.com/p/89889475" target="_blank" rel="noopener">這篇</a>比較清楚，因為原本找的幾篇都沒有去設定 bashrc，並且似乎因為沒有導向 build 好的 resource，導致這一段當初我搭配虛擬環境再次出錯，過程不贅述；以結果來說就是 opencv 已經正在 make install 了，但 install 指向的環境錯了，package 跑到原生環境去，而且其實最後一段 make 沒有成功。</p>
 <p>那就從頭來吧！首先先安裝相依套件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新套件</span></span><br><span class="line">$ sudo apt-get update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安裝 OpenCV 相依套件</span></span><br><span class="line">$ sudo apt-get install build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev</span><br></pre></td></tr></table></figure>
 
-<h3>opencv source code & virtualenv </h3>
-
-<p>接下來我就從 Adrian Rosebrock <a href="https://www.pyimagesearch.com/2018/05/28/ubuntu-18-04-how-to-install-opencv/" target="_blank" rel="noopener">教學文</a>的 step #2 開始參考。</p>
+<h3 id="opencv-source-code-amp-virtualenv"><a href="#opencv-source-code-amp-virtualenv" class="headerlink" title="opencv source code &amp; virtualenv"></a>opencv source code &amp; virtualenv</h3><p>接下來我就從 Adrian Rosebrock <a href="https://www.pyimagesearch.com/2018/05/28/ubuntu-18-04-how-to-install-opencv/" target="_blank" rel="noopener">教學文</a>的 step #2 開始參考。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下載 opencv 和 opencv_contrib，後面接要的版本號</span></span><br><span class="line">$ wget -O opencv.zip https://github.com/opencv/opencv/archive/3.4.3.zip</span><br><span class="line">$ wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.4.3.zip</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解壓縮</span></span><br><span class="line">$ unzip opencv_3.4.3.zip</span><br><span class="line">$ unzip opencv_contrib_3.4.3.zip</span><br><span class="line"></span><br><span class="line"><span class="comment"># 改檔名</span></span><br><span class="line">$ mv opencv_3.4.3.zip opencv</span><br><span class="line">$ mv opencv_contrib_3.4.3.zip opencv_contrib</span><br></pre></td></tr></table></figure>
 
 <br>
@@ -463,9 +459,7 @@
 <p>之前已經提過了需求，需要有 python 的 virtualenv 幫忙隔離環境。網路上其實會查到很多資源就直接使用 virtualenv，但我自己習慣使用 conda，看到 virtualenv 還需要切換到指定的虛擬環境資料夾才能 activate ，覺得有些麻煩，Andrian 的步驟三和上方關於虛擬環境的教學文裡的作法，都是利用 virtualenvwrapper 將整個工作流打包、統一管理虛擬環境並且修改環境變數。個人還是比較喜歡的。紀錄一下當時使用的命令。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pip install virtualenv virtualenvwrapper</span><br><span class="line"></span><br><span class="line"><span class="comment">## 開啟 ~/.bashrc 並下面這四行寫進去 ##</span></span><br><span class="line"><span class="comment"># virtualenv and virtualenvwrapper</span></span><br><span class="line"><span class="built_in">export</span> WORKON_HOME=<span class="variable">$HOME</span>/.virtualenvs</span><br><span class="line"><span class="built_in">export</span> VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3</span><br><span class="line"><span class="built_in">source</span> /usr/<span class="built_in">local</span>/bin/virtualenvwrapper.sh</span><br><span class="line"><span class="comment">## 編輯結束 ##</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 我將虛擬環境命名為 det</span></span><br><span class="line">$ mkvirtualenv det -p python3</span><br><span class="line">$ workon det</span><br><span class="line"></span><br><span class="line">$ pip install numpy</span><br></pre></td></tr></table></figure>
 
-<h3>make opencv</h3>
-
-<p>接下來是 Andrian 教學裡面的步驟四。</p>
+<h3 id="make-opencv"><a href="#make-opencv" class="headerlink" title="make opencv"></a>make opencv</h3><p>接下來是 Andrian 教學裡面的步驟四。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 要記得切換到當時改檔名的資料夾下</span></span><br><span class="line">$ <span class="built_in">cd</span> ~/opencv</span><br><span class="line">$ mkdir build</span><br><span class="line">$ <span class="built_in">cd</span> build</span><br><span class="line">$ cmake -D CMAKE_BUILD_TYPE=RELEASE \</span><br><span class="line">        -D CUDA_NVCC_FLAGS=<span class="string">"-D_FORCE_INLINES –expt-relaxed-constexpr"</span> \</span><br><span class="line">        -D CMAKE_INSTALL_PREFIX=/usr/<span class="built_in">local</span> \</span><br><span class="line">        -D INSTALL_PYTHON_EXAMPLES=ON \</span><br><span class="line">        -D OPENCV_EXTRA_MODULES_PATH=~/efficientdet/opencv_contrib/modules \</span><br><span class="line">        -D OPENCV_ENABLE_NONFREE=ON \</span><br><span class="line">        -D PYTHON_EXECUTABLE=~/.virtualenvs/det/bin/python \</span><br><span class="line">        -D BUILD_EXAMPLES=ON ..</span><br></pre></td></tr></table></figure>
 
 <p>這裡主要是要搭建 openCV 的建置環境，要注意的是 cmake 參數要根據自己的情形進行調整。NX 是支援 GPU 計算的，所以 CUDA_NVCC_FLAGS 要進行設定，OPENCV_EXTRA_MODULES_PATH 就按照最後 opencv_contrib 的路徑位置設定、PYTHON_EXECUTABLE 要記得設置成虛擬環境 python 執行檔的位置。</p>
@@ -476,10 +470,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make -j2</span><br></pre></td></tr></table></figure>
 
 <p>可查看自己的資源有幾個核心，後面的數字就改成支援的核心數量，像這裡支援的是 2 個。這邊 make 時間會很長，我等了大約 40-50 分鐘。完成後就可以安裝自己的 opencv。</p>
-<h3>套件連結至虛擬環境</h3>
-
-<p>接下來第五步，可能會出現一些分歧，主要是大家要找找自己 cv2.so 的檔案位置自哪裡，因為 opencv 版本的問題，我和教學文裡存放 .so 的位置不一樣，教學文的位置在 <code>/usr/local/python/cv2/python-3.6</code>。我的存放位置則是在 <code>/usr/local/lib/python3.6/site-packages/</code>。</p>
-<img src="/images/nvidia_nx/cv2.so_position.jpg">
+<h1 id="套件連結至虛擬環境"><a href="#套件連結至虛擬環境" class="headerlink" title="套件連結至虛擬環境"></a>套件連結至虛擬環境</h1><p>接下來第五步，可能會出現一些分歧，主要是大家要找找自己 cv2.so 的檔案位置自哪裡，因為 opencv 版本的問題，我和教學文裡存放 .so 的位置不一樣，教學文的位置在 <code>/usr/local/python/cv2/python-3.6</code>。我的存放位置則是在 <code>/usr/local/lib/python3.6/site-packages/</code>。</p>
+<img src="/images/nvidia_nx/cv2.so_position.JPG">
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ls /usr/<span class="built_in">local</span>/lib/python3.6/site-pakcages</span><br><span class="line">cv2.cpython-36m-aarch64-linux-gnu.so</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切換到剛剛找到 so 檔案的位置下，並改成簡單一點的檔名 cv2.so</span></span><br><span class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/lib/python3.6/site-pakcages</span><br><span class="line">$ sudo mv cv2.cpython-36m-x86_64-linux-gnu.so cv2.so</span><br></pre></td></tr></table></figure>
 
@@ -493,16 +485,12 @@
 
 <p>大體上還算是順利吧，等 tensorflow-gpu 的套件也裝起來後，最終還是得看看 inference code 是否正常運行。</p>
 <hr>
-<h3>2020.08.18 補充</h3>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 RAM + SWAP 的容量</span></span><br><span class="line">$ free -h </span><br><span class="line"><span class="comment"># 查看 SD 卡</span></span><br><span class="line">$ df -h</span><br><span class="line"><span class="comment"># 查看 CPU 狀況</span></span><br><span class="line">$ lscpu</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 GPU 運行狀態</span></span><br><span class="line">$ sudo /usr/bin/tegrastats</span><br><span class="line"><span class="comment"># 更改 power mode</span></span><br><span class="line">$ sudo /usr/sbin/nvpmodel -m &lt;x&gt;</span><br><span class="line"><span class="comment"># 查看 power mode</span></span><br><span class="line">$ sudo /usr/sbin/nvpmodel -q</span><br></pre></td></tr></table></figure>
+<h3 id="2020-08-18-補充"><a href="#2020-08-18-補充" class="headerlink" title="2020.08.18 補充"></a>2020.08.18 補充</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 RAM + SWAP 的容量</span></span><br><span class="line">$ free -h </span><br><span class="line"><span class="comment"># 查看 SD 卡</span></span><br><span class="line">$ df -h</span><br><span class="line"><span class="comment"># 查看 CPU 狀況</span></span><br><span class="line">$ lscpu</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 GPU 運行狀態</span></span><br><span class="line">$ sudo /usr/bin/tegrastats</span><br><span class="line"><span class="comment"># 更改 power mode</span></span><br><span class="line">$ sudo /usr/sbin/nvpmodel -m &lt;x&gt;</span><br><span class="line"><span class="comment"># 查看 power mode</span></span><br><span class="line">$ sudo /usr/sbin/nvpmodel -q</span><br></pre></td></tr></table></figure>
 
 <p>可以用上述通用指令看一下 xavier 的狀況，要注意 xavier nx 有兩種 mode，低功率(10w)跟高功率(15w)，兩種會使用的規格不一樣，10w 會啟動 2 個 CPU 或 4 個 CPU，15 w 則會全部啟動。 </p>
 <p>Nvidia 針對 jetson 家族的 power management 文件，<a href="https://docs.nvidia.com/jetson/l4t/index.html#page/Tegra%20Linux%20Driver%20Package%20Development%20Guide/power_management_jetson_xavier.html" target="_blank" rel="noopener">請點</a>。</p>
 <hr>
-<h3>Reference</h3>
-
-<ul>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
 <li><p><a href="https://jennaweng0621.pixnet.net/blog/post/404240501-[agx]-jetson-agx-xavier相關套件安裝參考" target="_blank" rel="noopener">https://jennaweng0621.pixnet.net/blog/post/404240501-%5bagx%5d-jetson-agx-xavier%e7%9b%b8%e9%97%9c%e5%a5%97%e4%bb%b6%e5%ae%89%e8%a3%9d%e5%8f%83%e8%80%83</a></p>
 </li>
 <li><p><a href="https://github.com/opencv/opencv/releases?after=3.4.9" target="_blank" rel="noopener">https://github.com/opencv/opencv/releases?after=3.4.9</a></p>
@@ -680,16 +668,6 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
         <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">tags</span>
         </a>
@@ -725,7 +703,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">開工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">opencv source code &amp; virtualenv </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">make opencv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">套件連結至虛擬環境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">5.</span> <span class="nav-text">2020.08.18 補充</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#開工"><span class="nav-number">1.</span> <span class="nav-text">開工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#opencv-source-code-amp-virtualenv"><span class="nav-number">2.</span> <span class="nav-text">opencv source code &amp; virtualenv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make-opencv"><span class="nav-number">3.</span> <span class="nav-text">make opencv</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#套件連結至虛擬環境"><span class="nav-number"></span> <span class="nav-text">套件連結至虛擬環境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-08-18-補充"><span class="nav-number">1.</span> <span class="nav-text">2020.08.18 補充</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></li></div>
             
 
           </div>
