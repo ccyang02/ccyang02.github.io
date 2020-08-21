@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="因為需要在 nx 板子上測試不同 framework 的環境，因此要新增加裝 pytorch 的環境。原本的環境需求是這樣： 1234# install requirements$ pip install pycocotools numpy opencv-python tqdm tensorboard tensorboardX pyyaml webcolors$ pip install torch">
+<meta name="keywords" content="Jetson NX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nvidia Jetson NX 系列 03.搭建 pytorch 環境">
+<meta property="og:url" content="http://yoursite.com/2020/08/21/nvidia nx 搭建 pytorch 環境/index.html">
+<meta property="og:site_name" content="小菜雞在市場走跳">
+<meta property="og:description" content="因為需要在 nx 板子上測試不同 framework 的環境，因此要新增加裝 pytorch 的環境。原本的環境需求是這樣： 1234# install requirements$ pip install pycocotools numpy opencv-python tqdm tensorboard tensorboardX pyyaml webcolors$ pip install torch">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-08-21T15:42:56.799Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nvidia Jetson NX 系列 03.搭建 pytorch 環境">
+<meta name="twitter:description" content="因為需要在 nx 板子上測試不同 framework 的環境，因此要新增加裝 pytorch 的環境。原本的環境需求是這樣： 1234# install requirements$ pip install pycocotools numpy opencv-python tqdm tensorboard tensorboardX pyyaml webcolors$ pip install torch">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/08/21/nvidia nx 搭建 pytorch 環境/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>Nvidia Jetson NX 系列 03.搭建 pytorch 環境 | 小菜雞在市場走跳</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小菜雞在市場走跳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">學習紀錄或隨筆</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/21/nvidia nx 搭建 pytorch 環境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="C.C. Yang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小菜雞在市場走跳">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Nvidia Jetson NX 系列 03.搭建 pytorch 環境
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-08-21 17:27:12 / Modified: 23:42:56" itemprop="dateCreated datePublished" datetime="2020-08-21T17:27:12+08:00">2020-08-21</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習紀錄/" itemprop="url" rel="index"><span itemprop="name">學習紀錄</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>因為需要在 nx 板子上測試不同 framework 的環境，因此要新增加裝 pytorch 的環境。原本的環境需求是這樣：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install requirements</span></span><br><span class="line">$ pip install pycocotools numpy opencv-python tqdm tensorboard tensorboardX pyyaml webcolors</span><br><span class="line">$ pip install torch==1.4.0</span><br><span class="line">$ pip install torchvision==0.5.0</span><br></pre></td></tr></table></figure>
+
+<p>但這邊有個血淚史，如果是要直接使用別人 github 上的 code，一如往常 CUDA 相關的環境，尤其和深度學習相關的一定要非常注意他的套件包的版本號。對失敗總結不感興趣的可以直接跳到成功安裝的那塊閱讀。</p>
+<a id="more"></a>
+
+<h4 id="失敗情形總結"><a href="#失敗情形總結" class="headerlink" title="失敗情形總結"></a>失敗情形總結</h4><p>正常的 linux 環境下，可以直接看 pytorch 的官網<a href="https://pytorch.org/get-started/previous-versions/" target="_blank" rel="noopener">[連結]</a>給出的版本號配對，天知道我在這裡到底碰壁了幾次…簡單總結一下，在 Nvidia Xavier NX 的板子環境裡，沒辦法直接使用以下狀況：</p>
+<h5 id="方法一、pip-install-torch-x-x-x"><a href="#方法一、pip-install-torch-x-x-x" class="headerlink" title="方法一、pip install torch===x.x.x"></a>方法一、pip install torch===x.x.x</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ pip install torch===1.5.0</span><br><span class="line">ERROR: Could not find a version that satisfies the requirement torch===1.5.0 (from versions: 0.1.2, 0.1.2.post1, 0.1.2.post2)</span><br><span class="line">ERROR: No matching distribution found <span class="keyword">for</span> torch===1.5.0</span><br></pre></td></tr></table></figure>
+
+<p>會直接找不到套件包，無法使用。</p>
+<h5 id="方法二、pypi-網站-連結-或-pytorch-org-提供的-wheel-檔案"><a href="#方法二、pypi-網站-連結-或-pytorch-org-提供的-wheel-檔案" class="headerlink" title="方法二、pypi 網站[連結]或 pytorch.org 提供的 wheel 檔案"></a>方法二、pypi 網站<a href="https://pypi.org/project/torch/1.5.1/#files" target="_blank" rel="noopener">[連結]</a>或 pytorch.org 提供的 wheel 檔案</h5><p>如果是一般的 linux 環境，可能是可行的吧？我只在終端 NX 上直接嘗試，不確定是否會遇到什麼其他意外。</p>
+<p>這邊遇到一個錯誤，當時我以為只要找 wheel 版本檔名內容後面接 linux 就可以了，因此看到 pypi 提供的 wheel 就開開心心照著 pytorch 的官網連結內容告知的版本，CUDA 10.2 搭配 pytorch 1.5.1 + torchvision 0.6.1，殊不知我太傻太天真。</p>
+<p>wheel 檔案安裝失敗。無論是直接將 wheel 檔案先下載好，還是利用 -f 導向網址 <code>pip install torch===1.6.0 torchvision===0.7.0 -f https://download.pytorch.org/whl/torch_stable.html</code> 都不行喔！</p>
+<blockquote>
+<p> 補充：wheel 檔名會表示要配合的 cuda 版本、torchvision 版本、python 版本 以及 環境是 linux arm64 windows。 例如：cu102/torchvision-0.6.0-cp35-cp35m-linux_x86_64.whl</p>
+</blockquote>
+<p>首先 Xavier NX 上，它需要的 wheel 檔格式一定要是 aarch 結尾，可以用指令 <code>pip debug --verbose</code> 查看該系統相容的 pip wheel 檔案名稱。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ pip debug --verbose</span><br><span class="line">  cp27-cp27mu-manylinux2014_aarch64</span><br><span class="line">  cp27-cp27mu-linux_aarch64</span><br><span class="line">  cp27-none-manylinux2014_aarch64</span><br><span class="line">  cp27-none-linux_aarch64</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
+
+<p>再來是，Xavier 系列相容的 torch 版本，一定要記得看 Nvidia 的官網上指定的啊！NX CUDA 10.2 不能搭配上方說的 torch 1.5.1 + torchvision 0.6.1。</p>
+<h4 id="官網提供的安裝辦法"><a href="#官網提供的安裝辦法" class="headerlink" title="官網提供的安裝辦法"></a>官網提供的安裝辦法</h4><p><a href="https://forums.developer.nvidia.com/t/pytorch-for-jetson-nano-version-1-6-0-now-available/72048" target="_blank" rel="noopener">請往這裡走</a></p>
+<p>貼文串的標題雖然是 Jetson Nano，但內文也說可以符合 NX 和 AGX。另外常常遇到問題後，NANO 的回答都還算是通用解，畢竟都是 Xavier 系列，而且 NANO 出來的時間比較久，也比較多討論串可以爬文。</p>
+<p>簡言之，NX 上面的 CUDA 版本和 JetPack 版本有關係，像這塊 NX 搭配 JetPack 4.4 版本，也就是根據這篇文章我要安裝 PyTorch v1.5.0 以上，然後這邊我又再次踩雷了… 要自己注意是 JetPack 4.4 Developer 還是 Production，分別對應 1.5 和 1.6。</p>
+<p>確定好版本後，點開 Installation，按照指令安裝，像我要搭配的是 torch 1.6.0 + torchvision 0.7.0。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://nvidia.box.com/shared/static/9eptse6jyly1ggt9axbja2yrmj6pbarc.whl -O torch-1.6.0-cp36-cp36m-linux_aarch64.whl</span><br><span class="line">$ sudo apt-get install python3-pip libopenblas-base libopenmpi-dev </span><br><span class="line">$ pip3 install Cython</span><br><span class="line">$ pip3 install numpy torch-1.6.0-cp36-cp36m-linux_aarch64.whl</span><br></pre></td></tr></table></figure>
+
+<p>這邊有神奇的一點是，不知道為何 numpy 一定要擺在 torch-1.6.0 前面，我之前一直沒裝好是因為我想說已經裝過 numpy 了，就把它拔掉了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install libjpeg-dev zlib1g-dev</span><br><span class="line">$ git <span class="built_in">clone</span> --branch release/0.7 https://github.com/pytorch/vision torchvision</span><br><span class="line">$ <span class="built_in">cd</span> torchvision</span><br><span class="line">$ sudo python3 setup.py install</span><br></pre></td></tr></table></figure>
+
+<p>另外因為我搭配了 virtualenv，中間遇到一個問題。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo python3 setup.py install</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"setup.py"</span>, line 13, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    import torch</span><br><span class="line">ModuleNotFoundError: No module named <span class="string">'torch'</span></span><br></pre></td></tr></table></figure>
+
+<p>但在虛擬環境下開啟 python import torch 是有東西的。因此我在 setup.py 裡面加上幾行印出系統執行檔位置，發現安裝時沒有正確的指向虛擬環境的執行檔。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">(det) $ python</span><br><span class="line">Python 3.6.9 (default, Jul 17 2020, 12:50:27)</span><br><span class="line">[GCC 8.4.0] on linux</span><br><span class="line">Type <span class="string">"help"</span>, <span class="string">"copyright"</span>, <span class="string">"credits"</span> or <span class="string">"license"</span> <span class="keyword">for</span> more information.</span><br><span class="line">&gt;&gt;&gt; import torchvision</span><br><span class="line">&gt;&gt;&gt; import sys</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">print</span> (sys.executable)</span><br><span class="line">/home/user/.virtualenvs/det/bin/python <span class="comment"># 虛擬環境指向的 python 執行檔</span></span><br><span class="line"></span><br><span class="line">(det) $ sudo python3 setup.py install</span><br><span class="line">/usr/bin/python3 <span class="comment"># 在安裝 setup.py 時指向的執行檔位置</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"setup.py"</span>, line 13, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    import torch</span><br><span class="line">ModuleNotFoundError: No module named <span class="string">'torch'</span></span><br></pre></td></tr></table></figure>
+
+<p>所以最後，其實強制導向到正確的位置進行執行即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(det) $ sudo /home/user/.virtualenvs/det/bin/python3 setup.py install</span><br></pre></td></tr></table></figure>
+
+<p>完成安裝後按照官網的測試指令，就可以確認是否安裝完成了歐！</p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a href="https://developer.nvidia.com/embedded/jetpack" target="_blank" rel="noopener">JetPack SDK</a></p>
+<p><a href="https://medium.com/fcamels-notes/linux-%E7%B7%A8%E8%AD%AF-shared-library-%E7%9A%84%E6%96%B9%E6%B3%95%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85-cb35844ef331" target="_blank" rel="noopener">Linux 編譯 shared library</a></p>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Jetson-NX/" rel="tag"># Jetson NX</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/17/nvidia nx 搭建 tensorflow 環境/" rel="next" title="Nvidia Jetson NX 系列 02.搭建 tensorflow-gpu 環境">
+                <i class="fa fa-chevron-left"></i> Nvidia Jetson NX 系列 02.搭建 tensorflow-gpu 環境
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+  <p class="site-author-name" itemprop="name">C.C. Yang</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#失敗情形總結"><span class="nav-number">1.</span> <span class="nav-text">失敗情形總結</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法一、pip-install-torch-x-x-x"><span class="nav-number">1.1.</span> <span class="nav-text">方法一、pip install torch===x.x.x</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法二、pypi-網站-連結-或-pytorch-org-提供的-wheel-檔案"><span class="nav-number">1.2.</span> <span class="nav-text">方法二、pypi 網站[連結]或 pytorch.org 提供的 wheel 檔案</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#官網提供的安裝辦法"><span class="nav-number">2.</span> <span class="nav-text">官網提供的安裝辦法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.C. Yang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// GET RESPONSIVE HEIGHT PASSED FROM IFRAME
+
+window.addEventListener("message", function(e) {
+  var data = e.data;
+  if ((typeof data === 'string') && (data.indexOf('ciu_embed') > -1)) {
+    var featureID = data.split(':')[1];
+    var height = data.split(':')[2];
+    $(`iframe[data-feature=${featureID}]`).height(parseInt(height) + 30);
+  }
+}, false);
+</script>
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>
