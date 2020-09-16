@@ -319,6 +319,173 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/16/理解 Javascript 的非同步操作：Event Loop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="C.C. Yang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小菜雞在市場走跳">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/09/16/理解 Javascript 的非同步操作：Event Loop/" class="post-title-link" itemprop="url">理解 Javascript 的非同步操作：Event Loop</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-09-16 21:48:37 / Modified: 22:06:08" itemprop="dateCreated datePublished" datetime="2020-09-16T21:48:37+08:00">2020-09-16</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習筆記/" itemprop="url" rel="index"><span itemprop="name">學習筆記</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="string">'delay 0 sec'</span>)&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Hello!'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>上述範例直覺可能會覺得輸出為 delay 0 sec –&gt; Hello，但結果為 Hello –&gt; delay 0 sec。為什麼？因為有事件循環 (Event Loop) 的參與，這個機制的目的主要想讓 Javascript 提供並行 (Concurrency) 運作。</p>
+<p>先快速總結一下自己最後的理解，Javascript 在並行中的非同步效果需要 Stack、Callback Queue 和 WebAPIs 三方合作；它不是 Javascript Engine 自身非同步，而是利用 Callback Queue 來避免 Stack 依序執行程式造成可能發生的阻塞問題，例如非同步的設計讓使用者在使用瀏覽器 (Browser) 的過程中能夠看到更新的頁面 (render) 又同時能得到點擊滑鼠時的相應回饋。</p>
+<p>以下這些概念可能需要依序建立。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/09/16/理解 Javascript 的非同步操作：Event Loop/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/21/nvidia nx 搭建 pytorch 環境/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -364,13 +531,23 @@
                 
               
 
-              <time title="Created: 2020-08-21 17:27:12 / Modified: 23:42:56" itemprop="dateCreated datePublished" datetime="2020-08-21T17:27:12+08:00">2020-08-21</time>
+              <time title="Created: 2020-08-21 17:27:12" itemprop="dateCreated datePublished" datetime="2020-08-21T17:27:12+08:00">2020-08-21</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-09-16 21:49:52" itemprop="dateModified" datetime="2020-09-16T21:49:52+08:00">2020-09-16</time>
+              </span>
             
           
 
@@ -383,7 +560,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習紀錄/" itemprop="url" rel="index"><span itemprop="name">學習紀錄</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習筆記/" itemprop="url" rel="index"><span itemprop="name">學習筆記</span></a></span>
 
                 
                 
@@ -545,7 +722,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-08-18 16:29:13" itemprop="dateModified" datetime="2020-08-18T16:29:13+08:00">2020-08-18</time>
+                <time title="Modified: 2020-09-16 21:49:43" itemprop="dateModified" datetime="2020-09-16T21:49:43+08:00">2020-09-16</time>
               </span>
             
           
@@ -559,7 +736,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習紀錄/" itemprop="url" rel="index"><span itemprop="name">學習紀錄</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習筆記/" itemprop="url" rel="index"><span itemprop="name">學習筆記</span></a></span>
 
                 
                 
@@ -718,7 +895,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-08-18 16:34:50" itemprop="dateModified" datetime="2020-08-18T16:34:50+08:00">2020-08-18</time>
+                <time title="Modified: 2020-09-16 21:50:00" itemprop="dateModified" datetime="2020-09-16T21:50:00+08:00">2020-09-16</time>
               </span>
             
           
@@ -732,7 +909,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習紀錄/" itemprop="url" rel="index"><span itemprop="name">學習紀錄</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習筆記/" itemprop="url" rel="index"><span itemprop="name">學習筆記</span></a></span>
 
                 
                 
@@ -1069,7 +1246,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-08-18 15:47:54" itemprop="dateModified" datetime="2020-08-18T15:47:54+08:00">2020-08-18</time>
+                <time title="Modified: 2020-09-16 21:49:33" itemprop="dateModified" datetime="2020-09-16T21:49:33+08:00">2020-09-16</time>
               </span>
             
           
@@ -1083,7 +1260,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習紀錄/" itemprop="url" rel="index"><span itemprop="name">學習紀錄</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習筆記/" itemprop="url" rel="index"><span itemprop="name">學習筆記</span></a></span>
 
                 
                 
@@ -1244,7 +1421,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-08-18 16:32:50" itemprop="dateModified" datetime="2020-08-18T16:32:50+08:00">2020-08-18</time>
+                <time title="Modified: 2020-09-16 21:50:12" itemprop="dateModified" datetime="2020-09-16T21:50:12+08:00">2020-09-16</time>
               </span>
             
           
@@ -1258,7 +1435,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習紀錄/" itemprop="url" rel="index"><span itemprop="name">學習紀錄</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習筆記/" itemprop="url" rel="index"><span itemprop="name">學習筆記</span></a></span>
 
                 
                 
@@ -1539,7 +1716,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1555,6 +1732,8 @@
           
         
         
+        
+          
         
           
         
@@ -1587,7 +1766,9 @@
         
           
         
-        <span class="site-state-item-count">5</span>
+          
+        
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span>
         </a>
       </div>

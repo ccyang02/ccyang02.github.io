@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="12setTimeout(function()&amp;#123;console.log(&apos;delay 0 sec&apos;)&amp;#125;, 0)console.log(&apos;Hello!&apos;)  上述範例直覺可能會覺得輸出為 delay 0 sec –&amp;gt; Hello，但結果為 Hello –&amp;gt; delay 0 sec。為什麼？因為有事件循環 (Event Loop) 的參與，這個機制的目的主要想讓 Jav">
+<meta name="keywords" content="Javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解 Javascript 的非同步操作：Event Loop">
+<meta property="og:url" content="http://yoursite.com/2020/09/16/理解 Javascript 的非同步操作：Event Loop/index.html">
+<meta property="og:site_name" content="小菜雞在市場走跳">
+<meta property="og:description" content="12setTimeout(function()&amp;#123;console.log(&apos;delay 0 sec&apos;)&amp;#125;, 0)console.log(&apos;Hello!&apos;)  上述範例直覺可能會覺得輸出為 delay 0 sec –&amp;gt; Hello，但結果為 Hello –&amp;gt; delay 0 sec。為什麼？因為有事件循環 (Event Loop) 的參與，這個機制的目的主要想讓 Jav">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/images/js_event_loop/js_engine.png">
+<meta property="og:image" content="http://yoursite.com/images/js_event_loop/stack.png">
+<meta property="og:image" content="http://yoursite.com/images/js_event_loop/eventloop.png">
+<meta property="og:image" content="http://yoursite.com/images/js_event_loop/sync_async.png">
+<meta property="og:updated_time" content="2020-09-16T14:06:08.722Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="理解 Javascript 的非同步操作：Event Loop">
+<meta name="twitter:description" content="12setTimeout(function()&amp;#123;console.log(&apos;delay 0 sec&apos;)&amp;#125;, 0)console.log(&apos;Hello!&apos;)  上述範例直覺可能會覺得輸出為 delay 0 sec –&amp;gt; Hello，但結果為 Hello –&amp;gt; delay 0 sec。為什麼？因為有事件循環 (Event Loop) 的參與，這個機制的目的主要想讓 Jav">
+<meta name="twitter:image" content="http://yoursite.com/images/js_event_loop/js_engine.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/09/16/理解 Javascript 的非同步操作：Event Loop/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>理解 Javascript 的非同步操作：Event Loop | 小菜雞在市場走跳</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小菜雞在市場走跳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">學習紀錄或隨筆</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/16/理解 Javascript 的非同步操作：Event Loop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="C.C. Yang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小菜雞在市場走跳">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">理解 Javascript 的非同步操作：Event Loop
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-09-16 21:48:37 / Modified: 22:06:08" itemprop="dateCreated datePublished" datetime="2020-09-16T21:48:37+08:00">2020-09-16</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習筆記/" itemprop="url" rel="index"><span itemprop="name">學習筆記</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="string">'delay 0 sec'</span>)&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Hello!'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>上述範例直覺可能會覺得輸出為 delay 0 sec –&gt; Hello，但結果為 Hello –&gt; delay 0 sec。為什麼？因為有事件循環 (Event Loop) 的參與，這個機制的目的主要想讓 Javascript 提供並行 (Concurrency) 運作。</p>
+<p>先快速總結一下自己最後的理解，Javascript 在並行中的非同步效果需要 Stack、Callback Queue 和 WebAPIs 三方合作；它不是 Javascript Engine 自身非同步，而是利用 Callback Queue 來避免 Stack 依序執行程式造成可能發生的阻塞問題，例如非同步的設計讓使用者在使用瀏覽器 (Browser) 的過程中能夠看到更新的頁面 (render) 又同時能得到點擊滑鼠時的相應回饋。</p>
+<p>以下這些概念可能需要依序建立。</p>
+<a id="more"></a>
+
+<h3 id="Javascript-的執行環境：Call-Stack-amp-Heap-Memory"><a href="#Javascript-的執行環境：Call-Stack-amp-Heap-Memory" class="headerlink" title="Javascript 的執行環境：Call Stack &amp; Heap Memory"></a>Javascript 的執行環境：Call Stack &amp; Heap Memory</h3><p>Javascript 是單執行緒 (single threaded)，也就是一次只執行一行指令，其實也可以直接說它的執行過程就是同步的；看到這裡可能會很直覺地反問，那為什麼我們可以使用各種監聽器 EventTarget.addEventListener()？這答案牽涉到<strong>整個頁面的運作不僅僅是 Javascript Engine</strong>，別忘了 Javascript Engine 是運作在瀏覽器上的。</p>
+<img src="/images/js_event_loop/js_engine.png">
+
+<center>圖片來源: https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop</center>
+先回到 Javascript 本身，Javascript Engine 有兩個很重要的組成部分：Call Stack 和 Heap Memory。Call Stack 是一種資料結構，會幫忙紀錄整個 Javascript 的執行過程，而 function 的實際環境建構過程 (Excution Context) 發生在這個位置。當一個 function 被呼叫時，一個對應的 stack frame 會被創建出來，這個流程牽涉到直譯器的運作，執行環境會先被建立，過程牽涉到 scope chain 初始化、建立 function 的 argument 或 variable，進入執行階段後才開始真正的賦值。
+
+<p>總之這個 frame 建立時會被放到 Stack 的最上方，當該 function 執行完畢，則整個 context、也是 frame 便會從 Stack 中移除；Heap Memory 是記憶體分配的位置，和物件相關。</p>
+<p>關於 Excution Context 可以參考<a href="https://dev.to/thebabscraig/the-javascript-execution-context-call-stack-event-loop-1if1" target="_blank" rel="noopener">這裡</a>和<a href="http://andyyou.github.io/2015/04/18/what-is-the-execution-context-in-javascript/" target="_blank" rel="noopener">這裡</a>。所以以一小段程式碼為例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  a()</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  b()</span><br><span class="line">&#125;</span><br><span class="line">c()</span><br></pre></td></tr></table></figure>
+
+<img src="/images/js_event_loop/stack.png">
+
+<p>補充一下，Stack 和 Queue 都是資料結構的一種，Stack 的特色是先進後出 (Last In First Out，LIFO)，Queue 則是先進先出 (First In First Out，FIFO)。</p>
+<p>PS：其實上面有兩個中文名詞都用到執行環境，一個是 runtime 一個是 execution context；但兩者存在著差別， runtime 想要描述的是牽涉到整個 JS 運作時的環境狀態，包含 WebAPIs 和 Javascript Engine。而 Excution Context 的環境則是指實際建構你的 function 環境、變數環境、作用域 (scope chain) 。</p>
+<blockquote>
+<p>When you visit a website you do so within a web browser, like Chrome, Firefox, Edge, or Safari. Each browser has a <strong>JS Runtime Environment</strong>. In the environment are Web API’s that a developer can access to build a program.</p>
+<p>Also in the runtime environment is a <strong>Javascript Engine</strong> that parses the code. Each browser has its own version of a JS engine. Chrome uses what it calls its <strong>V8 JS Engine</strong> and that is what we will analyze now.</p>
+</blockquote>
+<h3 id="WebAPIs"><a href="#WebAPIs" class="headerlink" title="WebAPIs?"></a>WebAPIs?</h3><p>剛剛其實已經提到整個頁面的運作需要 Javascript Engine 和 Browser 的合作。</p>
+<p>先前總是在 Javascript 裡面寫到 EventTarget.addEventListener()，它並不是由 JS 提供 (真的是直到現在才突然理解以前教程上說的 “document 是由瀏覽器提供的方法” 這句話XD)，它是來自瀏覽器的 WebAPI，所以除了 DOM 操作以外，AJAX、setTimeout 等等這些其實都是 WebAPI。</p>
+<blockquote>
+<p>AJAX, the DOM tree, and other API’s, are not part of Javascript, they are just objects with properties and methods, provided by the browser and made available in the browser’s JS Runtime Environment.</p>
+</blockquote>
+<h3 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h3><p>所以說到這裡，到底 Event Loop 的機制是怎麼輔助 Javscript Engine 達到非同步的效果呢？我們已經知道在 Stack 會執行 function，但當這個 function 是 WebAPI 的時候，瀏覽器會執行這個 WebAPI，Stack 內的 function 會結束並離開，而 WebAPI 挾帶的 callback function 不會馬上被執行，callback function 會直到 WebAPI 觸發完條件 (可能是 setTimeout 的時間到了、可能是一個 click 事件等等) 時，被放入 Callback Queue。最後直到 Call Stack 被清空時，Callback Queue 才會進到 Stack 裡被執行。</p>
+<img src="/images/js_event_loop/eventloop.png">
+
+<center>圖片來源: https://medium.com/@Rahulx1/understanding-event-loop-call-stack-event-job-queue-in-javascript-63dcd2c71ecd</center>
+
+
+<p>那可以說 Event Loop 是個 process，由這個 process 來觸發 Callback Queue，並且該 process 也會監控 Call Stack 是否已經空了，當 Stack 空了，則會從 Queue pop out 一個 process 並 push 進 Stack 裡面執行。</p>
+<h3 id="大神們怎麼說？"><a href="#大神們怎麼說？" class="headerlink" title="大神們怎麼說？"></a>大神們怎麼說？</h3><p>首先，可以參考 Philip Robert <a href="https://www.youtube.com/watch?v=8aGhZQkoFbQ&index=42&list=WL&t=32s" target="_blank" rel="noopener">解說 Event Loop</a> <font color="#FF6600"><strong>(很重要！！必看！！！)</strong></font>，涉及的觀念都說得很清楚，同時搭配很棒的範例；而 <a href="https://pjchender.blogspot.com/2017/08/javascript-learn-event-loop-stack-queue.html" target="_blank" rel="noopener">PJ 大大的筆記</a>也做得很清晰，其實當能理解 Event Loop 的整體概念後，Phil 大大所描述的例子正是 “強化” 這個機制所帶來的效果，因此我們更能從影片裡真實感受到 Event Loop 運作模式。我簡單引用條列一下其中的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'hi'</span>)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'there'</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'JSConfEU'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>若不理解 Event Loop 的運作模式時，可能會認為輸出為 hi –&gt; there –&gt; JSConfEU ，但實際結果是 hi –&gt; JSConfEU –&gt; there。</p>
+<p>因為 setTimeout 是 WebAPIs，我們的 callback function (這裡的 <code>function(){console.log(&#39;there&#39;)}</code>) 會在 WebAPIs 中等待 0 秒後放入 callback queue 裡，而 stack 裡的 function 都執行完畢後才會輪到 queue 裡的 function。</p>
+<p>另外還有 Click Event 和 Multiple setTimeout，接下來的例子請搭配 Phil 的動畫食用，講解的非常清楚。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Click Event //</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Started'</span>)</span><br><span class="line"></span><br><span class="line">$.on(<span class="string">'button'</span>, <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> <span class="title">onClick</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Clicked'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">onTimeout</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Timeout Finished'</span>)</span><br><span class="line">&#125;, <span class="number">5000</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Done'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>執行結果來說，同樣是 Started –&gt; Done，而 Click 事件以及 setTimeout 是依序進入 WebAPIs 之中，WebAPIs 裡的倒計時一結束就會放進 queue，確認 Done 已經出現後，才會顯示 “Timeout Finished”。同樣的，就算頁面一出現就馬上按滑鼠， “Clicked” 字樣的出現也必須等到 “Done” 出現後才會顯現喔！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Multiple setTimeout //</span></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timeout</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'hi'</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timeout</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'hi'</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timeout</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'hi'</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timeout</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'hi'</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+
+<p>那這個範例想要給出的概念則是， timeout 並不能保證一定會在 1 秒後一定執行 callback function，而是說至少 1 秒的等待時間。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Synchronous</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>].forEach(<span class="function"><span class="keyword">function</span> (<span class="params">i</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i)</span><br><span class="line">  delay()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Asynchronous</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">asyncForEach</span>(<span class="params">array, cb</span>) </span>&#123;</span><br><span class="line">  array.forEach(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    setTimeout(cb, <span class="number">0</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">asyncForEach([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], <span class="function"><span class="keyword">function</span> (<span class="params">i</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i)</span><br><span class="line">  delay()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>這是一個模擬瀏覽器 render 的情形，請同樣要搭配 Phil 大大的動畫食用喔！</p>
+<p>渲染的優先權高於 callback function，若是同步的方式，則因為執行較久的函式 (也就是這裡的 delay()) 在 stack 中，需要等待所有 delay 結束才能渲染；但若是非同步，這些時長久的 function 會被放入 callback function，也因此給予了畫面渲染的機會。</p>
+<p>上述僅拿出幾個當初一開始看到，我需要著墨一下的範例，還有更多範例都可以從提到的 reference 裡再研讀喔！</p>
+<h3 id="補充：同步-Synchronize-還是異步-Asynchronize"><a href="#補充：同步-Synchronize-還是異步-Asynchronize" class="headerlink" title="補充：同步 (Synchronize) 還是異步 (Asynchronize)"></a>補充：同步 (Synchronize) 還是異步 (Asynchronize)</h3><p>在這次找網路資源時，也順便糾正一下自己同步異步的觀念，<a href="https://medium.com/@hyWang/%E9%9D%9E%E5%90%8C%E6%AD%A5-asynchronous-%E8%88%87%E5%90%8C%E6%AD%A5-synchronous-%E7%9A%84%E5%B7%AE%E7%95%B0-c7f99b9a298a" target="_blank" rel="noopener">這篇</a>例子舉的挺生動啊。先前思考到這個點的時候，都沒有意識到一次處理多個指令這樣的講法和實際的運作存在落差。</p>
+<p>過去認為的 “一次處理一個指令是同步” 和 “一次處理多個指令是異步” 的定義有點不太對，這個認為只是同步異步呈現出來的<strong>效果</strong>，可以理解為是客戶感受到的，但不是處理這些指令的對象實際的操作。 </p>
+<p>同步異步描述的是針對單一請求送出的處理模式，也就是同步實際上是 function 在執行時，你必須等待它處理完成，但若是異步，則是你把 function 交出去後，不用繼續等待，而是繼續往下執行即可，該 function 會等到它被處理完成後反響回來。</p>
+<img src="/images/js_event_loop/sync_async.png">
+
+<center>圖片來源: https://stackoverflow.com/questions/4844637/what-is-the-difference-between-concurrency-parallelism-and-asynchronous-methods </center>
+
+
+<h3 id="小總結"><a href="#小總結" class="headerlink" title="小總結"></a>小總結</h3><p>在這次的研讀內容裡，其實還涉及到一些概念需要深化，例如過程中需要區分一下 Concurrency vs Parallelism 以及 Async vs Sync 的差異、Javascript 直譯器的運作等等。那麼最後總結幾個小點作為收尾吧！</p>
+<ol>
+<li>JS 是單執行緒，但可搭配瀏覽器 WebAPIs 和 Event Loop 的機制達到非同步的效果</li>
+<li>JS Engine 裡 Stack 的運作原理，先進後出，被呼叫到的 function 會疊到 Stack 上方，執行完成就拋出，直到 Stack 清空</li>
+<li>Callback Queue 是先進先出，WebAPIs 會將 callback function 丟入 Queue 中，在 Stack 清空時將 Queue 的 function 丟入 Stack 中執行</li>
+<li>實作面：在涉及 render 頁面時，要考慮耗時的 function 的位置要設計在 stack 還是交由 WebAPIs。</li>
+</ol>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://blog.techbridge.cc/2019/10/05/javascript-async-sync-and-callback/" target="_blank" rel="noopener">https://blog.techbridge.cc/2019/10/05/javascript-async-sync-and-callback/</a></p>
+<p><a href="https://medium.com/javascript-in-plain-english/understanding-javascript-heap-stack-event-loops-and-callback-queue-6fdec3cfe32e" target="_blank" rel="noopener">https://medium.com/javascript-in-plain-english/understanding-javascript-heap-stack-event-loops-and-callback-queue-6fdec3cfe32e</a></p>
+<p>Understanding JavaScript The Weird Part 學習筆記</p>
+<p><a href="https://medium.com/@brianwu291/javascript%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-understanding-javascript-the-weird-part-1-execution-context-lexical-environment-55aebb71222d" target="_blank" rel="noopener">https://medium.com/@brianwu291/javascript%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-understanding-javascript-the-weird-part-1-execution-context-lexical-environment-55aebb71222d</a></p>
+<p>Excution Context</p>
+<p><a href="http://andyyou.github.io/2015/04/18/what-is-the-execution-context-in-javascript/" target="_blank" rel="noopener">http://andyyou.github.io/2015/04/18/what-is-the-execution-context-in-javascript/</a></p>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Javascript/" rel="tag"># Javascript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/21/nvidia nx 搭建 pytorch 環境/" rel="next" title="Nvidia Jetson NX 系列 03.搭建 pytorch 環境">
+                <i class="fa fa-chevron-left"></i> Nvidia Jetson NX 系列 03.搭建 pytorch 環境
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+  <p class="site-author-name" itemprop="name">C.C. Yang</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Javascript-的執行環境：Call-Stack-amp-Heap-Memory"><span class="nav-number">1.</span> <span class="nav-text">Javascript 的執行環境：Call Stack &amp; Heap Memory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebAPIs"><span class="nav-number">2.</span> <span class="nav-text">WebAPIs?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-Loop"><span class="nav-number">3.</span> <span class="nav-text">Event Loop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大神們怎麼說？"><span class="nav-number">4.</span> <span class="nav-text">大神們怎麼說？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#補充：同步-Synchronize-還是異步-Asynchronize"><span class="nav-number">5.</span> <span class="nav-text">補充：同步 (Synchronize) 還是異步 (Asynchronize)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小總結"><span class="nav-number">6.</span> <span class="nav-text">小總結</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.C. Yang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// GET RESPONSIVE HEIGHT PASSED FROM IFRAME
+
+window.addEventListener("message", function(e) {
+  var data = e.data;
+  if ((typeof data === 'string') && (data.indexOf('ciu_embed') > -1)) {
+    var featureID = data.split(':')[1];
+    var height = data.split(':')[2];
+    $(`iframe[data-feature=${featureID}]`).height(parseInt(height) + 30);
+  }
+}, false);
+</script>
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>
