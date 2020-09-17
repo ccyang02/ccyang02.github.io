@@ -111,7 +111,7 @@
 <meta property="og:image" content="http://yoursite.com/images/js_event_loop/stack.png">
 <meta property="og:image" content="http://yoursite.com/images/js_event_loop/eventloop.png">
 <meta property="og:image" content="http://yoursite.com/images/js_event_loop/sync_async.png">
-<meta property="og:updated_time" content="2020-09-17T08:21:32.131Z">
+<meta property="og:updated_time" content="2020-09-17T13:57:19.686Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 Javascript 的非同步操作：Event Loop">
 <meta name="twitter:description" content="12setTimeout(function()&amp;#123;console.log(&apos;delay 0 sec&apos;)&amp;#125;, 0)console.log(&apos;Hello!&apos;)  上述範例直覺可能會覺得輸出為 delay 0 sec –&amp;gt; Hello，但結果為 Hello –&amp;gt; delay 0 sec。為什麼？因為有事件循環 (Event Loop) 的參與，這個機制的目的主要想讓 Jav">
@@ -385,7 +385,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-09-17 16:21:32" itemprop="dateModified" datetime="2020-09-17T16:21:32+08:00">2020-09-17</time>
+                <time title="Modified: 2020-09-17 21:57:19" itemprop="dateModified" datetime="2020-09-17T21:57:19+08:00">2020-09-17</time>
               </span>
             
           
@@ -442,7 +442,7 @@
 <a id="more"></a>
 
 <h3 id="Javascript-的執行環境：Call-Stack-amp-Heap-Memory"><a href="#Javascript-的執行環境：Call-Stack-amp-Heap-Memory" class="headerlink" title="Javascript 的執行環境：Call Stack &amp; Heap Memory"></a>Javascript 的執行環境：Call Stack &amp; Heap Memory</h3><p>Javascript 是單執行緒 (single threaded)，也就是一次只執行一行指令，其實也可以直接說它的執行過程就是同步的；看到這裡可能會很直覺地反問，那為什麼我們可以使用各種監聽器 EventTarget.addEventListener()？這答案牽涉到<strong>整個頁面的運作不僅僅是 Javascript Engine</strong>，別忘了 Javascript Engine 是運作在瀏覽器上的。</p>
-<img src="/images/js_event_loop/jsengine.JPG">
+<img style="margin: auto;" src="/images/js_event_loop/jsengine.JPG">
 
 <center>圖片來源: https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop</center>
 先回到 Javascript 本身，Javascript Engine 有兩個很重要的組成部分：Call Stack 和 Heap Memory。Call Stack 是一種資料結構，會幫忙紀錄整個 Javascript 的執行過程，而 function 的實際環境建構過程 (Excution Context) 發生在這個位置。當一個 function 被呼叫時，一個對應的 stack frame 會被創建出來，這個流程牽涉到直譯器的運作，執行環境會先被建立，過程牽涉到 scope chain 初始化、建立 function 的 argument 或 variable，進入執行階段後才開始真正的賦值。
