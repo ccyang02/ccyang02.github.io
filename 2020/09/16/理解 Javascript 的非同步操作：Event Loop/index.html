@@ -111,7 +111,7 @@
 <meta property="og:image" content="http://yoursite.com/images/js_event_loop/stack.png">
 <meta property="og:image" content="http://yoursite.com/images/js_event_loop/eventloop.png">
 <meta property="og:image" content="http://yoursite.com/images/js_event_loop/sync_async.png">
-<meta property="og:updated_time" content="2020-09-16T14:06:08.722Z">
+<meta property="og:updated_time" content="2020-09-17T08:08:16.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 Javascript 的非同步操作：Event Loop">
 <meta name="twitter:description" content="12setTimeout(function()&amp;#123;console.log(&apos;delay 0 sec&apos;)&amp;#125;, 0)console.log(&apos;Hello!&apos;)  上述範例直覺可能會覺得輸出為 delay 0 sec –&amp;gt; Hello，但結果為 Hello –&amp;gt; delay 0 sec。為什麼？因為有事件循環 (Event Loop) 的參與，這個機制的目的主要想讓 Jav">
@@ -370,13 +370,23 @@
                 
               
 
-              <time title="Created: 2020-09-16 21:48:37 / Modified: 22:06:08" itemprop="dateCreated datePublished" datetime="2020-09-16T21:48:37+08:00">2020-09-16</time>
+              <time title="Created: 2020-09-16 21:48:37" itemprop="dateCreated datePublished" datetime="2020-09-16T21:48:37+08:00">2020-09-16</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-09-17 16:08:16" itemprop="dateModified" datetime="2020-09-17T16:08:16+08:00">2020-09-17</time>
+              </span>
             
           
 
@@ -459,7 +469,6 @@
 
 <center>圖片來源: https://medium.com/@Rahulx1/understanding-event-loop-call-stack-event-job-queue-in-javascript-63dcd2c71ecd</center>
 
-
 <p>那可以說 Event Loop 是個 process，由這個 process 來觸發 Callback Queue，並且該 process 也會監控 Call Stack 是否已經空了，當 Stack 空了，則會從 Queue pop out 一個 process 並 push 進 Stack 裡面執行。</p>
 <h3 id="大神們怎麼說？"><a href="#大神們怎麼說？" class="headerlink" title="大神們怎麼說？"></a>大神們怎麼說？</h3><p>首先，可以參考 Philip Robert <a href="https://www.youtube.com/watch?v=8aGhZQkoFbQ&index=42&list=WL&t=32s" target="_blank" rel="noopener">解說 Event Loop</a> <font color="#FF6600"><strong>(很重要！！必看！！！)</strong></font>，涉及的觀念都說得很清楚，同時搭配很棒的範例；而 <a href="https://pjchender.blogspot.com/2017/08/javascript-learn-event-loop-stack-queue.html" target="_blank" rel="noopener">PJ 大大的筆記</a>也做得很清晰，其實當能理解 Event Loop 的整體概念後，Phil 大大所描述的例子正是 “強化” 這個機制所帶來的效果，因此我們更能從影片裡真實感受到 Event Loop 運作模式。我簡單引用條列一下其中的例子：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'hi'</span>)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'there'</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'JSConfEU'</span>)</span><br></pre></td></tr></table></figure>
@@ -484,7 +493,6 @@
 <img src="/images/js_event_loop/sync_async.png">
 
 <center>圖片來源: https://stackoverflow.com/questions/4844637/what-is-the-difference-between-concurrency-parallelism-and-asynchronous-methods </center>
-
 
 <h3 id="小總結"><a href="#小總結" class="headerlink" title="小總結"></a>小總結</h3><p>在這次的研讀內容裡，其實還涉及到一些概念需要深化，例如過程中需要區分一下 Concurrency vs Parallelism 以及 Async vs Sync 的差異、Javascript 直譯器的運作等等。那麼最後總結幾個小點作為收尾吧！</p>
 <ol>
@@ -552,6 +560,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2020/09/17/AC 學期 2-2：上緊發條的軟體開發實務入門/" rel="prev" title="上緊發條的軟體開發實務入門">
+                上緊發條的軟體開發實務入門 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -618,7 +630,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -634,8 +646,6 @@
           
         
         
-        
-          
         
           
         
