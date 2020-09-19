@@ -111,7 +111,7 @@
 <meta property="og:image" content="http://yoursite.com/images/js_event_loop/stack.png">
 <meta property="og:image" content="http://yoursite.com/images/js_event_loop/eventloop.png">
 <meta property="og:image" content="http://yoursite.com/images/js_event_loop/sync_async.png">
-<meta property="og:updated_time" content="2020-09-17T13:57:19.686Z">
+<meta property="og:updated_time" content="2020-09-19T06:28:33.756Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 Javascript 的非同步操作：Event Loop">
 <meta name="twitter:description" content="12setTimeout(function()&amp;#123;console.log(&apos;delay 0 sec&apos;)&amp;#125;, 0)console.log(&apos;Hello!&apos;)  上述範例直覺可能會覺得輸出為 delay 0 sec –&amp;gt; Hello，但結果為 Hello –&amp;gt; delay 0 sec。為什麼？因為有事件循環 (Event Loop) 的參與，這個機制的目的主要想讓 Jav">
@@ -385,7 +385,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-09-17 21:57:19" itemprop="dateModified" datetime="2020-09-17T21:57:19+08:00">2020-09-17</time>
+                <time title="Modified: 2020-09-19 14:28:33" itemprop="dateModified" datetime="2020-09-19T14:28:33+08:00">2020-09-19</time>
               </span>
             
           
@@ -493,9 +493,9 @@
 <img src="/images/js_event_loop/sync_async.png">
 
 <center>圖片來源: https://stackoverflow.com/questions/4844637/what-is-the-difference-between-concurrency-parallelism-and-asynchronous-methods </center>
-### 小總結
 
-<p>在這次的研讀內容裡，其實還涉及到一些概念需要深化，例如過程中需要區分一下 Concurrency vs Parallelism 以及 Async vs Sync 的差異、Javascript 直譯器的運作等等。那麼最後總結幾個小點作為收尾吧！</p>
+
+<h3 id="小總結"><a href="#小總結" class="headerlink" title="小總結"></a>小總結</h3><p>在這次的研讀內容裡，其實還涉及到一些概念需要深化，例如過程中需要區分一下 Concurrency vs Parallelism 以及 Async vs Sync 的差異、Javascript 直譯器的運作等等。那麼最後總結幾個小點作為收尾吧！</p>
 <ol>
 <li>JS 是單執行緒，但可搭配瀏覽器 WebAPIs 和 Event Loop 的機制達到非同步的效果</li>
 <li>JS Engine 裡 Stack 的運作原理，先進後出，被呼叫到的 function 會疊到 Stack 上方，執行完成就拋出，直到 Stack 清空</li>
@@ -716,7 +716,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Javascript-的執行環境：Call-Stack-amp-Heap-Memory"><span class="nav-number">1.</span> <span class="nav-text">Javascript 的執行環境：Call Stack &amp; Heap Memory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebAPIs"><span class="nav-number">2.</span> <span class="nav-text">WebAPIs?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-Loop"><span class="nav-number">3.</span> <span class="nav-text">Event Loop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大神們怎麼說？"><span class="nav-number">4.</span> <span class="nav-text">大神們怎麼說？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#補充：同步-Synchronize-還是異步-Asynchronize"><span class="nav-number">5.</span> <span class="nav-text">補充：同步 (Synchronize) 還是異步 (Asynchronize)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Javascript-的執行環境：Call-Stack-amp-Heap-Memory"><span class="nav-number">1.</span> <span class="nav-text">Javascript 的執行環境：Call Stack &amp; Heap Memory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebAPIs"><span class="nav-number">2.</span> <span class="nav-text">WebAPIs?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-Loop"><span class="nav-number">3.</span> <span class="nav-text">Event Loop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大神們怎麼說？"><span class="nav-number">4.</span> <span class="nav-text">大神們怎麼說？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#補充：同步-Synchronize-還是異步-Asynchronize"><span class="nav-number">5.</span> <span class="nav-text">補充：同步 (Synchronize) 還是異步 (Asynchronize)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小總結"><span class="nav-number">6.</span> <span class="nav-text">小總結</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
