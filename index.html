@@ -320,6 +320,184 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ccyang02.github.io/2020/11/15/專案建置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="C.C. Yang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小菜雞在市場走跳">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/11/15/專案建置/" class="post-title-link" itemprop="url">老爸的私房錢 - 專案建置 (待完善)</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-11-15 20:59:33 / Modified: 21:01:11" itemprop="dateCreated datePublished" datetime="2020-11-15T20:59:33+08:00">2020-11-15</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/學習筆記/" itemprop="url" rel="index"><span itemprop="name">學習筆記</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>你為何會選擇這個專案？<ul>
+<li>在初期學習網路工程的相關技術時，我感覺到光是學習網路資源是不夠的，需要一個能夠實際操練的專案，並且因為平時需要上班，在有限的時間下，我希望這個專案的難度對我而言不能過度困難但又能夠確保在時間內完成練習。</li>
+</ul>
+</li>
+<li>你使用了什麼技術？<ul>
+<li>在這份專案裡，前端使用 bootstrap 作為 framework，後端執行環境採用 node.js 和搭配 express，使用 handlebars 作為前端模板的渲染引擎，並串接 mongoDB 作為資料庫。功能層面包含使用者登入以及認證，使用 express.session 加上 可指定認證策略的 express.passport 搭配完成。另外在資料存入資料庫之前，會使用 express-validator 作後端資料驗證的部份。</li>
+</ul>
+</li>
+<li>哪部分你相對能掌握？哪裡花了最多時間？<ul>
+<li>因為我的學習最一開始先接觸前端，在 bootstrap 和 handlebars 部份掌握度較好，在使用者登入和認證的地方，花了較久的時間研究，觀看範例程式、串接 passport 以及認證時也需要錯誤訊息提示使用者 (使用 flash-connect)。另外其實過程中，在資料庫撰寫的時候，會遇到不同步的問題，花不少時間在鞏固關於非同步的語法和概念。</li>
+</ul>
+</li>
+<li>過程中碰到什麼困難？又如何克服？（例如：查找網路文件）<ul>
+<li>首先是資料庫非同步的問題，例如一開始我將非同步和同步的語法混用，一直預期後半的同步部份會順利接到資料庫的回傳，最後卻發現回傳是空陣列；或者在時間顯示的問題上，一開始並沒有意識到可能存在伺服器端和客戶端的電腦處在異地造成時間不同的問題。在非同步的問題上，觀念就顯得需要重新補齊，因此花了時間去看非同步的教學資源，以及也需要注意技術文件裡提到例如 callback 字眼的都是屬於非同步的方法，之前也特別去弄懂 Event Loop 的議題，至於時間顯示的難點在於可以思考到用時間戳的方式作為 server 和 client 之間的溝通方法，但瀏覽器上需要重新將時間戳顯示回特殊的 format 這點，其實這裡就重在操作，後來花了不少時間在前端處理時間戳的問題上。</li>
+</ul>
+</li>
+<li>過程中你有對哪個技術有特別深刻的學習？<ul>
+<li>技術層面來說，其實印象最深刻的還是登入認證那一塊，總是可以看到概念上很輕鬆的表示：就像你要進到一個場所，接待人員認證件不認人，但實際上的操作卻是非常多小細節。</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ccyang02.github.io/2020/09/17/AC 學期 2-2：上緊發條的軟體開發實務入門/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1891,7 +2069,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
